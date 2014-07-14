@@ -67,6 +67,9 @@
     <Compile Include="Teacher.xaml.cs">
       <DependentUpon>Teacher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WInforming.xaml.cs">
+      <DependentUpon>WInforming.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WTest.xaml.cs">
       <DependentUpon>WTest.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Teacher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WInforming.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

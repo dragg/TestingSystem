@@ -4,6 +4,10 @@
         Title="MainWindow" Height="350" Width="629" Loaded="Window_Loaded">
     <Grid>
         <Button Content="Настроить всё всё" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="113" Click="TeachersSettings"/>
-        <Button Content="Начать тест" Height="23" HorizontalAlignment="Left" Margin="12,78,0,0" Name="button1" VerticalAlignment="Top" Width="113" Click="BeginTest"/>
+        
+        
+        <Button Content="Начать тест" Height="23" HorizontalAlignment="Left" Margin="95,103,0,0" Name="button1" VerticalAlignment="Top" Width="113" Click="BeginTest"/>
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,71,0,0" Name="FIO" VerticalAlignment="Top" Width="227" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="24,74,0,0" Name="textBlock1" Text="Фамилия Имя Отчество:" VerticalAlignment="Top" />
     </Grid>
 </Window>

@@ -12,5 +12,7 @@ namespace Application
         public static String DefaultPathToFileWithQuestion = "Question.dat";
 
         public static String PathToSettings = "Settings.stg";
+
+        public static String PathToMembers = "Members.txt";
     }
 }
