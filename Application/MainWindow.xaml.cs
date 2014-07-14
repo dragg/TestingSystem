@@ -39,7 +39,14 @@ namespace Application
             this.Hide();
             WTest wTest = new WTest();
             wTest.Owner = this;
-            wTest.ShowDialog();
+            try
+            {
+                wTest.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                //Заплатка
+            }
         }
     }
 }

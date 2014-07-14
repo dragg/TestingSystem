@@ -69,7 +69,7 @@ namespace Application
                 else
                 {
                     Random rnd = new Random();
-                    int max = AllQuestions.Count - 1;
+                    int max = AllQuestions.Count;
                     for (int find = this.countQuestion; 0 < find; find--)
                     {
                         int now = rnd.Next(0, max);
@@ -100,21 +100,24 @@ namespace Application
                 this.Owner.Show();
                 this.Close();
             }
-            
-            wasAnswerAndHow = new List<Tuple<List<bool>, List<bool>>>();
-            foreach (var q in questions)
+            else
             {
-                List<bool> answers = new List<bool>();
-                for (int i = 0; i < q.GetAllAnswer().Count; i++)
-                {
-                    answers.Add(false);
-                }
-                List<bool> right = new List<bool>();
-                right.Add(false);
-                wasAnswerAndHow.Add(new Tuple<List<bool>, List<bool>>(right, answers));
-            }
 
-            ShowQuestion();
+                wasAnswerAndHow = new List<Tuple<List<bool>, List<bool>>>();
+                foreach (var q in questions)
+                {
+                    List<bool> answers = new List<bool>();
+                    for (int i = 0; i < q.GetAllAnswer().Count; i++)
+                    {
+                        answers.Add(false);
+                    }
+                    List<bool> right = new List<bool>();
+                    right.Add(false);
+                    wasAnswerAndHow.Add(new Tuple<List<bool>, List<bool>>(right, answers));
+                }
+
+                ShowQuestion();
+            }
         }
 
         private void Next(object sender, RoutedEventArgs e)
@@ -209,6 +212,7 @@ namespace Application
                 btFinish.IsEnabled = true;
 
             btNote.IsEnabled = true;
+            btToAnswer.IsEnabled = false;
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -233,6 +237,8 @@ namespace Application
                 //ShowDialog();
                 //MessageBox.("Вы действительно хотете выйти? Только кнопка Завершить сохранит все данные!");
             }
+            this.Owner.Show();
+            this.Close();
         }
 
         private void DisableAllCheckBox()
@@ -340,6 +346,11 @@ namespace Application
             if (wasAnswerAndHow[currentQuestion].Item1[0])
             {
                 DisableAllCheckBox();
+                btToAnswer.IsEnabled = false;
+            }
+            else
+            {
+                btToAnswer.IsEnabled = true;
             }
         }
 
