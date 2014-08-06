@@ -11,14 +11,16 @@ namespace Application
         private String Text;
         private String Note;
         List<Answer> answers;
+        private bool NewQuestion = true;
 
         public Question()
         {
             answers = new List<Answer>();
         }
 
-        public Question(String text, String note, List<Answer> answers = null)
+        public Question(String text, String note, List<Answer> answers = null, bool newQuestion = true)
         {
+            NewQuestion = newQuestion;
             Text = text;
             Note = note;
             this.answers = (answers == null ? new List<Answer>() : new List<Answer>(answers));
@@ -77,6 +79,12 @@ namespace Application
                 answer.ReadAnswer(read);
                 answers.Add(answer);
             }
+            NewQuestion = false;
+        }
+
+        public bool IsNewQuestion()
+        {
+            return NewQuestion;
         }
     }
 }

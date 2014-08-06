@@ -40,8 +40,6 @@ namespace Application
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //Сделать позиционирование на центре
-
             tbStatus.Text = result ? "Вы ответили верно!" : "Вы ошиблись!";
             tbNote.Text = note;
         }

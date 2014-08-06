@@ -1,20 +1,49 @@
 ﻿<Window x:Class="Application.WTeacher"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Teacher" Height="484" Width="752" Loaded="Window_Loaded">
+        Title="Редактор тестов" Height="500" Width="750" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" MinHeight="500" MinWidth="350" Closing="Window_Closing" Background="AliceBlue" FontSize="14" FontWeight="Bold">
     <Grid>
-        <ListBox Height="291" HorizontalAlignment="Left" Margin="133,142,0,0" Name="lbListQuestions" VerticalAlignment="Top" Width="585" MouseDoubleClick="OpenSelectQuestion" SelectionChanged="lbListQuestions_SelectionChanged"/>
-        <TextBlock Height="12" HorizontalAlignment="Left" Margin="133,124,0,0" Name="textBlock1" Text="Список вопросов:" VerticalAlignment="Top" />
-        <Button Content="Добавить вопрос" Height="23" HorizontalAlignment="Left" Margin="12,142,0,0" Name="btAddQuestion" VerticalAlignment="Top" Width="115" Click="AddQuestion" />
-        <Button Content="Изменить вопрос" Height="23" HorizontalAlignment="Left" Margin="12,171,0,0" Name="btChangeQuestion" VerticalAlignment="Top" Width="115" Click="ChangeQuestion"  IsEnabled="False"/>
-        <Button Content="Удалить вопрос" Height="23" HorizontalAlignment="Left" Margin="12,200,0,0" Name="btDeleteQuestion" VerticalAlignment="Top" Width="115" Click="DeleteQuestion" IsEnabled="False"/>
-        <Button Content="Открыть" Height="23" HorizontalAlignment="Left" Margin="12,283,0,0" Name="btOpen" VerticalAlignment="Top" Width="115" Click="OpenQuestions" />
-        <Button Content="Сохранить" Height="23" HorizontalAlignment="Left" Margin="12,312,0,0" Name="btSave" VerticalAlignment="Top" Width="115" Click="SaveQuestions" />
-        <Button Content="Удалить вопросы" Height="23" HorizontalAlignment="Left" Margin="12,229,0,0" Name="button1" VerticalAlignment="Top" Width="115" Click="DeleteAllQuestion" />
-        <TextBlock Height="20" HorizontalAlignment="Left" Margin="12,12,0,0" Name="textBlock2" Text="Количество вопросов в тесте:" VerticalAlignment="Top" />
-        <TextBlock Height="13" HorizontalAlignment="Left" Margin="12,48,0,0" Name="textBlock3" Text="Файл с вопросами по умолчанию:" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,9,398,0" Name="tbCountQuestion" VerticalAlignment="Top" Width="120" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,45,398,0" Name="tbPathToFile" VerticalAlignment="Top" Width="120" />
-        <Button Content="Применить" Height="23" HorizontalAlignment="Left" Margin="344,74,0,0" Name="button2" VerticalAlignment="Top" Width="75" Click="ApplySettings"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="1">
+            <TextBlock DockPanel.Dock="Top" Height="23" Name="textBlock1" Text="Список вопросов:" Margin="10" />
+            
+            <StackPanel DockPanel.Dock="Left" Margin="10,5,5,10">
+                <Button Margin="5" Content="Добавить вопрос" Height="26" HorizontalAlignment="Left"  Name="btAddQuestion" VerticalAlignment="Top" Width="150" Click="AddQuestion" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+                <Button Margin="5" Content="Изменить вопрос" Height="26" HorizontalAlignment="Left"  Name="btChangeQuestion" VerticalAlignment="Top" Width="150" Click="ChangeQuestion"  IsEnabled="False" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+                <Button Margin="5" Content="Удалить вопрос" Height="26" HorizontalAlignment="Left"  Name="btDeleteQuestion" VerticalAlignment="Top" Width="150" Click="DeleteQuestion" IsEnabled="False" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+                <Button Margin="5" Content="Открыть" Height="26" HorizontalAlignment="Left" Name="btOpen" VerticalAlignment="Top" Width="150" Click="OpenQuestions" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+                <Button Margin="5,30,5,5" Content="Сохранить" Height="26" HorizontalAlignment="Left" Name="btSave" VerticalAlignment="Top" Width="150" Click="SaveQuestions" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+                <Button Margin="5" Content="Удалить вопросы" Height="26" HorizontalAlignment="Left" Name="button1" VerticalAlignment="Top" Width="150" Click="DeleteAllQuestion" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+            </StackPanel>
+
+            <ListBox Margin="5,5,10,10" Name="lbListQuestions" MouseDoubleClick="OpenSelectQuestion" SelectionChanged="lbListQuestions_SelectionChanged"/>
+        </DockPanel>
+        
+        <Grid Grid.Row="0" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="450">
+                <TextBlock DockPanel.Dock="Left" Margin="10,10,5,10" Height="20" HorizontalAlignment="Left" Name="textBlock2" Text="Количество вопросов в тесте:" VerticalAlignment="Top" />
+                <TextBox DockPanel.Dock="Right" Margin="5,10,10,10" Height="26" Name="tbCountQuestion"  />
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="450">
+                <TextBlock DockPanel.Dock="Left" Margin="10,10,5,10" Height="20" Name="textBlock3" Text="Файл с вопросами по умолчанию:" />
+                <TextBox DockPanel.Dock="Right" Margin="5,10,10,10" Height="26" Name="tbPathToFile" VerticalAlignment="Top" />
+            </DockPanel>
+
+            <Button Grid.Row="2" Content="Применить" Height="26" Name="button2" Width="100" Click="ApplySettings" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+        </Grid>
+        
+        
+        
     </Grid>
 </Window>

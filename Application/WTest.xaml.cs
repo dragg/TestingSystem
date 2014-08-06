@@ -326,8 +326,11 @@ namespace Application
                 StackPanel spAnswer = new StackPanel();
                 spAnswer.Orientation = Orientation.Horizontal;
                 CheckBox chTrue = new CheckBox();
+                chTrue.Margin = new Thickness(10, 5, 5, 5);
+
                 TextBlock tbAnswer = new TextBlock();
                 tbAnswer.Text = answers[i].Text;
+                tbAnswer.Margin = new Thickness(10, 5, 5, 5);
 
                 spAnswer.Children.Add(chTrue);
                 spAnswer.Children.Add(tbAnswer);

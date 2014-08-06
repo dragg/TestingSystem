@@ -1,10 +1,11 @@
 ﻿<Window x:Class="Application.WInforming"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Правильный ответ" Height="219" Width="401" ResizeMode="NoResize" Loaded="Window_Loaded">
-    <Grid>
-        <TextBlock Height="20" Margin="10" HorizontalAlignment="Center" Name="tbStatus" Text="Информация: верно или нет!" VerticalAlignment="Top" Width="150" />
-        <TextBlock Height="103" HorizontalAlignment="Left" Margin="12,36,0,0" Name="tbNote" Text="Сама информация,т.е. ответ на вопрос и почему так." VerticalAlignment="Top" Width="355" />
-        <Button Content="ОК" Height="23" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="OkAndClose"/>
-    </Grid>
+        Title="Правильный ответ" Height="220" Width="400" ResizeMode="NoResize" Loaded="Window_Loaded" MaxWidth="400" MinWidth="400" MinHeight="220" WindowStartupLocation="CenterScreen" Background="AliceBlue" FontSize="14" FontWeight="Bold" BorderBrush="#FFE22B2B">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Margin="10" TextAlignment="Center" Name="tbStatus" Text="Информация: верно или нет!" VerticalAlignment="Center" />
+        <Button DockPanel.Dock="Bottom" Margin="10" Content="ОК" Height="26" Width="75" IsDefault="True" Click="OkAndClose" BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
+        <TextBlock Name="tbNote" TextAlignment="Center" Text="Сама информация,т.е. ответ на вопрос и почему так." TextWrapping="Wrap"/>
+        
+    </DockPanel>
 </Window>

@@ -18,6 +18,8 @@ namespace Application
     /// </summary>
     public partial class WQuestion : Window
     {
+        Question question = null;
+
         private bool save = false;
 
         public WQuestion()
@@ -27,6 +29,7 @@ namespace Application
 
         public WQuestion(Question q)
         {
+            question = q;
             InitializeComponent();
             tbQuestion.Text = q.GetQuestion();
             tbNote.Text = q.GetNote();
@@ -80,6 +83,26 @@ namespace Application
             }
         }
 
+        private void SaveQuestion(Question q = null)
+        {
+            if (q == null)
+            {
+                List<Answer> answers = new List<Answer>();
+                foreach (var answer in lbAnswers.Items)
+                {
+                    answers.Add(answer as Answer);
+                }
+                (this.Owner as WTeacher).AddQuestion(new Question(tbQuestion.Text, tbNote.Text.ToString(), answers, false));
+            }
+            else
+            {
+                (this.Owner as WTeacher).AddQuestion(q);
+            }
+            
+            //(Parent as WTeacher)
+            save = true;
+        }
+
         private void SaveAndClose(object sender, RoutedEventArgs e)
         {
             if (tbQuestion.Text.ToString() == "" || tbNote.Text.ToString() == "" || lbAnswers.Items.Count == 0)
@@ -106,14 +129,7 @@ namespace Application
                 else
                 {
                     //Save
-                    List<Answer> answers = new List<Answer>();
-                    foreach (var answer in lbAnswers.Items)
-                    {
-                        answers.Add(answer as Answer);
-                    }
-                    (this.Owner as WTeacher).AddQuestion(new Question(tbQuestion.Text, tbNote.Text.ToString(), answers));
-                    //(Parent as WTeacher)
-                    save = true;
+                    SaveQuestion();
 
                     //Close
                     this.Close();
@@ -134,6 +150,13 @@ namespace Application
                 if (!(wNSC.ShowDialog() == true))
                 {
                     e.Cancel = true;
+                }
+                else
+                {
+                    if (question != null && !question.IsNewQuestion())
+                    {
+                         SaveQuestion(question);
+                    }
                 }
             }
         }

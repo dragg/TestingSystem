@@ -20,6 +20,10 @@ namespace Application
     /// </summary>
     public partial class WTeacher : Window
     {
+        private bool Saved = false;
+
+        private bool Changed = false;
+
         private List<Question> listQuestions = new List<Question>();
 
         public WTeacher()
@@ -67,11 +71,13 @@ namespace Application
             {
                 lbListQuestions.Items.Add(question);
             }
+            Changed = true;
         }
 
         private void OpenSelectQuestion(object sender, MouseButtonEventArgs e)
         {
             ChangeQuestion();
+            Changed = true;
         }
 
         private void AddQuestion(object sender, RoutedEventArgs e)
@@ -79,6 +85,7 @@ namespace Application
             WQuestion wQuestion = new WQuestion();
             wQuestion.Owner = this;
             wQuestion.ShowDialog();
+            Changed = true;
         }
 
         private void ChangeQuestion(object sender, RoutedEventArgs e)
@@ -194,6 +201,7 @@ namespace Application
         {
             listQuestions.Clear();
             ShowQuestion();
+            Changed = true;
         }
 
         private void ApplySettings(object sender, RoutedEventArgs e)
@@ -214,6 +222,18 @@ namespace Application
             catch(Exception ex)
             {
                 MessageBox.Show("Не удалось применить. Проверьте вверность вводимых данных!");
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Changed && !Saved)
+            {
+                NotSaverChange wNSC = new NotSaverChange();
+                if (!(wNSC.ShowDialog() == true))
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }
