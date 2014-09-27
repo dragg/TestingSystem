@@ -7,7 +7,7 @@ namespace Application
 {
     static class Helper
     {
-        public static Char Separation = '\t';
+        public static String Separation = "\t\t\t";
         public static int DefaultCountQuestion = 10;
         public static String DefaultPathToFileWithQuestion = "Question.dat";
 

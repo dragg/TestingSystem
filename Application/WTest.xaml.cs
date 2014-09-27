@@ -47,6 +47,10 @@ namespace Application
                 List<Question> AllQuestions = new List<Question>();
                 reader = new StreamReader(path);
                 int countQuestion = Int32.Parse(reader.ReadLine());
+                if (countQuestion == 1)
+                {
+                    btNext.IsEnabled = false;
+                }
                 for (int i = 0; i < countQuestion; i++)
                 {
                     Question q = new Question();
@@ -329,6 +333,8 @@ namespace Application
                 chTrue.Margin = new Thickness(10, 5, 5, 5);
 
                 TextBlock tbAnswer = new TextBlock();
+                tbAnswer.Width = this.Width - 50;
+                tbAnswer.TextWrapping = TextWrapping.Wrap;
                 tbAnswer.Text = answers[i].Text;
                 tbAnswer.Margin = new Thickness(10, 5, 5, 5);
 
@@ -339,6 +345,8 @@ namespace Application
             }
 
             tbQuestion.Text = questions[currentQuestion].GetQuestion();
+            tbQuestion.Width = this.Width - 15;
+            tbQuestion.TextWrapping = TextWrapping.Wrap;
 
             foreach (var spAnswer in listAnswers)
             {

@@ -58,7 +58,7 @@ namespace Application
 
         public void WriteQuestion(StreamWriter write)
         {
-            write.WriteLine(Text + Helper.Separation + Note);
+            write.WriteLine(Text + '\n' + Helper.Separation + '\n' + Note + '\n' + Helper.Separation);
             write.WriteLine(answers.Count);
             foreach (var answer in answers)
             {
@@ -68,9 +68,53 @@ namespace Application
 
         public void ReadQuestion(StreamReader read)
         {
-            String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
-            Text = TextAndNote[0];
-            Note = TextAndNote[1];
+            String TextString = "", NoteString = "", tempString = "";
+            bool first = true;
+            do
+            {
+                if (first)
+                {
+                    first = !first;
+                }
+                else
+                {
+                    TextString += tempString + '\n';
+                }
+                
+                if (tempString != "")
+                {
+                    //TextString += '\n';
+                }
+                tempString = read.ReadLine();
+            } while (tempString != Helper.Separation);
+            TextString = TextString.Remove(TextString.Length - 1);
+            tempString = "";
+            first = true;
+
+            do
+            {
+                if (first)
+                {
+                    first = !first;
+                }
+                else
+                {
+                    NoteString += tempString + '\n';
+                }
+
+                if (tempString != "")
+                {
+                    //NoteString += '\n';
+                }
+                tempString = read.ReadLine();
+            } while (tempString != Helper.Separation);
+            NoteString = NoteString.Remove(NoteString.Length - 1);
+
+            Text = TextString;
+            Note = NoteString;
+            //String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
+            //Text = TextAndNote[0];
+            //Note = TextAndNote[1];
             String cntString = read.ReadLine();
             int cnt = Int32.Parse(cntString);
             for (int i = 0; i < cnt; i++)

@@ -9,7 +9,7 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
-            <TextBlock Height="31" HorizontalAlignment="Left" Margin="10,10,0,0" Name="textBlock1" Text="Вы собираетесь выйти из редактора без сохранения изменений." VerticalAlignment="Top" Width="304" TextAlignment="Center" TextWrapping="Wrap" />
+            <TextBlock Height="31" HorizontalAlignment="Left" Margin="10,10,0,0" Name="textBlock1" Text="Возможно, вы собираетесь выйти из редактора без сохранения изменений." VerticalAlignment="Top" Width="304" TextAlignment="Center" TextWrapping="Wrap" />
             <TextBlock HorizontalAlignment="Left" Margin="10,47,0,16" Name="textBlock2" Text="Вы действительно хотите выйти?" TextAlignment="Center" Width="302" />
         </Grid>
         

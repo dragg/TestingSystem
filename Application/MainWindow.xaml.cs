@@ -26,6 +26,8 @@ namespace Application
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //mainGrid.Height = this.Height;
+            //mainGrid.Width = this.Width;
         }
 
         private void TeachersSettings(object sender, RoutedEventArgs e)
@@ -36,17 +38,31 @@ namespace Application
 
         private void BeginTest(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            WTest wTest = new WTest();
-            wTest.Owner = this;
-            try
+            if (FIO.Text != "")
             {
-                wTest.ShowDialog();
+                this.Hide();
+                WTest wTest = new WTest();
+                wTest.Owner = this;
+                try
+                {
+                    wTest.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    //Заплатка
+                }
             }
-            catch (Exception ex)
+            else
             {
-                //Заплатка
+                MessageBox.Show("Пожалуйста, заполните данные!");
             }
+            
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+                btSetting.IsEnabled = !btSetting.IsEnabled;
         }
     }
 }

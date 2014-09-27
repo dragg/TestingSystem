@@ -36,14 +36,39 @@ namespace Application
 
         public void WriteAnswer(StreamWriter writer)
         {
-            writer.WriteLine(Text + Helper.Separation + Right);
+            writer.WriteLine(Text + '\n' + Helper.Separation + '\n' + Right);
         }
 
         public void ReadAnswer(StreamReader read)
         {
-            String[] answer = read.ReadLine().Split(new Char[] {Helper.Separation});
-            Text = answer[0];
-            Right = Boolean.Parse(answer[1]);
+            String answer = "", right = "", tempString = "";
+            bool first = true;
+            do
+            {
+                if (first)
+                {
+                    first = !first;
+                }
+                else
+                {
+                    answer += tempString + '\n';
+                }
+
+                if (tempString != "")
+                {
+                    //answer += '\n';
+                }
+                tempString = read.ReadLine();
+            } while (tempString != Helper.Separation);
+            answer = answer.Remove(answer.Length - 1);
+
+            right = read.ReadLine();
+
+            Text = answer;
+            Right = Boolean.Parse(right);
+            //String[] answer = read.ReadLine().Split(new Char[] {Helper.Separation});
+            //Text = answer[0];
+            //Right = Boolean.Parse(answer[1]);
         }
     }
 }
