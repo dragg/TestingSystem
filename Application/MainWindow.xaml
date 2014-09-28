@@ -5,7 +5,8 @@
     
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/background.png" />
+            <!--<ImageBrush ImageSource="pack://application:,,,/Resources/background.png" />-->
+            <ImageBrush ImageSource="background.png" />
         </Grid.Background>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">

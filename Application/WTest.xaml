@@ -5,7 +5,8 @@
     
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/background.png" />
+            <!--<ImageBrush ImageSource="pack://application:,,,/Resources/background.png" />-->
+            <ImageBrush ImageSource="background.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

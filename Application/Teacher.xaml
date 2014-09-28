@@ -4,7 +4,8 @@
         Title="Редактор тестов" Height="500" Width="750" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" MinHeight="500" MinWidth="350" Closing="Window_Closing" Background="AliceBlue" FontSize="14" FontWeight="Bold"  WindowState="Maximized">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/background.png" />
+            <!--<ImageBrush ImageSource="pack://application:,,,/Resources/background.png" />-->
+            <ImageBrush ImageSource="background.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"></RowDefinition>

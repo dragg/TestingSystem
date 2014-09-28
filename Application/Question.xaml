@@ -4,7 +4,8 @@
         Title="Редактор вопроса" Height="550" Width="750" Closed="Window_Closed" Closing="Window_Closing" WindowStartupLocation="CenterScreen" MinWidth="750" MinHeight="550" Background="AliceBlue" FontSize="14" FontWeight="Bold" BorderBrush="#FFE22B2B" WindowState="Maximized">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/background.png" />
+            <!--<ImageBrush ImageSource="pack://application:,,,/Resources/background.png" />-->
+            <ImageBrush ImageSource="background.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*">
