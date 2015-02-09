@@ -177,6 +177,39 @@ namespace Application
                 answers.Add(answer);
             }
             NewQuestion = false;
+
+
+            SortBySubject();
+        }
+
+        private void SortBySubject()
+        {
+            //Тут будем хранить отсортированные ответы
+            List<Answer> tempAnswers = new List<Answer>();
+
+            //Будем сортировать в этом порядке
+            List<String> names = new List<string>()
+            {
+                "Объект",
+                "Объктная сторона",
+                "Субъект",
+                "Субъектная сторона"
+            };
+
+            //Сортируем
+            for (int i = 0; i < names.Count; i++)
+            {
+                for (int j = 0; j < answers.Count; j++)
+                {
+                    if (answers[j].Subject == names[i])
+                    {
+                        tempAnswers.Add(answers[j]);
+                    }
+                }
+            }
+
+            //Записываем результат сортировки
+            answers = tempAnswers;
         }
 
         public bool IsNewQuestion()

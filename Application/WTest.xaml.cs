@@ -24,6 +24,8 @@ namespace Application
         //                                                                              2 - на каждый ответ, как был отвечен
         private List<Tuple <List<bool>, List<bool>>> wasAnswerAndHow;
 
+        private List<int> checkedCounters = new List<int>();
+
         private int right = 0, wrong = 0;
 
         private int countQuestion;
@@ -121,21 +123,22 @@ namespace Application
                     List<bool> right = new List<bool>();
                     right.Add(false);
                     wasAnswerAndHow.Add(new Tuple<List<bool>, List<bool>>(right, answers));
-                }
 
+                    checkedCounters.Add(0);
+                }
                 ShowQuestion();
             }
         }
 
         private void Next(object sender, RoutedEventArgs e)
         {
+            SaveValues();//Сохраняем отмеченные значения
             if (wasAnswerAndHow[currentQuestion + 1].Item1[0])
             {
                 btNote.IsEnabled = true;
             }
             else
             {
-                SaveValues();//Сохраняем отмеченные значения
                 btNote.IsEnabled = false;
             }
 
@@ -145,13 +148,13 @@ namespace Application
 
         private void Prev(object sender, RoutedEventArgs e)
         {
+            SaveValues();//Сохраняем отмеченные значения
             if (wasAnswerAndHow[currentQuestion - 1].Item1[0])
             {
                 btNote.IsEnabled = true;
             }
             else
             {
-                SaveValues();//Сохраняем отмеченные значения
                 btNote.IsEnabled = false;
             }
 
@@ -192,34 +195,42 @@ namespace Application
 
         private void ToAnswer(object sender, RoutedEventArgs e)
         {
-            wasAnswerAndHow[currentQuestion].Item1[0] = true;//Помечаем, что на вопрос ответили
-            SaveValues();
-
-            WInforming wInformation = new WInforming();
-            wInformation.Owner = this;
-
-            bool error = !IsRightAnswer();
-
-
-            if (error)
+            //Проверим, что в каждой категории выбран ответ
+            if (checkedCounters[currentQuestion] != 4)
             {
-                wrong++;
+                MessageBox.Show("Выберите в каждой категории ответ!");
             }
             else
             {
-                right++;
+                wasAnswerAndHow[currentQuestion].Item1[0] = true;//Помечаем, что на вопрос ответили
+                SaveValues();
+
+                WInforming wInformation = new WInforming();
+                wInformation.Owner = this;
+
+                bool error = !IsRightAnswer();
+
+
+                if (error)
+                {
+                    wrong++;
+                }
+                else
+                {
+                    right++;
+                }
+
+                wInformation.SaveInformation(error ? false : true, questions[currentQuestion].GetNote());
+                wInformation.ShowDialog();
+
+                DisableAllCheckBox();
+
+                if (CheckAllAnswer())
+                    btFinish.IsEnabled = true;
+
+                btNote.IsEnabled = true;
+                btToAnswer.IsEnabled = false;
             }
-
-            wInformation.SaveInformation(error ? false : true, questions[currentQuestion].GetNote());
-            wInformation.ShowDialog();
-
-            DisableAllCheckBox();
-
-            if (CheckAllAnswer())
-                btFinish.IsEnabled = true;
-
-            btNote.IsEnabled = true;
-            btToAnswer.IsEnabled = false;
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -307,9 +318,9 @@ namespace Application
             }
         }
 
-        //Переделать!
         private void SetValues()
         {
+            checkedCounters[currentQuestion] = 0;
             int i = 0;
             foreach (var answer in spObjectAnswers.Children)
             {
@@ -325,22 +336,6 @@ namespace Application
                 }
             }
 
-            i = 0;
-            foreach (var answer in spSubjectAnswers.Children)
-            {
-                if (answer is StackPanel)
-                {
-                    foreach (var item in (answer as StackPanel).Children)
-                    {
-                        if (item is CheckBox)
-                        {
-                            (item as CheckBox).IsChecked = wasAnswerAndHow[currentQuestion].Item2[i++];
-                        }
-                    }
-                }
-            }
-
-            i = 0;
             foreach (var answer in spObjectiveSideAnswers.Children)
             {
                 if (answer is StackPanel)
@@ -355,7 +350,22 @@ namespace Application
                 }
             }
 
-            i = 0;
+
+            foreach (var answer in spSubjectAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsChecked = wasAnswerAndHow[currentQuestion].Item2[i++];
+                        }
+                    }
+                }
+            }
+
+
             foreach (var answer in spSubjectiveSideAnswers.Children)
             {
                 if (answer is StackPanel)
@@ -437,18 +447,26 @@ namespace Application
 
                 if (answers[i].Subject == "Объект")
                 {
+                    chTrue.Checked += new RoutedEventHandler(this.CheckBoxChangedObject);
+                    chTrue.Unchecked += new RoutedEventHandler(this.CheckBoxChangedObject);
                     listObjectAnswers.Add(spAnswer);
                 }
                 else if (answers[i].Subject == "Субъект")
                 {
+                    chTrue.Checked += new RoutedEventHandler(this.CheckBoxChangedSubject);
+                    chTrue.Unchecked += new RoutedEventHandler(this.CheckBoxChangedSubject);
                     listSubjectAnswers.Add(spAnswer);
                 }
                 else if (answers[i].Subject == "Субъектная сторона")
                 {
+                    chTrue.Checked += new RoutedEventHandler(this.CheckBoxChangedSubjectiveSide);
+                    chTrue.Unchecked += new RoutedEventHandler(this.CheckBoxChangedSubjectiveSide);
                     listSubjectiveSideAnswers.Add(spAnswer);
                 }
                 else if (answers[i].Subject == "Объктная сторона")
                 {
+                    chTrue.Checked += new RoutedEventHandler(this.CheckBoxChangedObjectiveSide);
+                    chTrue.Unchecked += new RoutedEventHandler(this.CheckBoxChangedObjectiveSide);
                     listObjectiveSideAnswers.Add(spAnswer);
                 }
                 //listAnswers.Add(spAnswer);
@@ -485,6 +503,115 @@ namespace Application
             {
                 btToAnswer.IsEnabled = true;
             }
+        }
+
+        private void CheckBoxChangedObject(object sender, RoutedEventArgs e)
+        {
+            bool IsChecked = (sender as CheckBox).IsChecked == true;
+            foreach (var item in spObjectAnswers.Children)
+            {
+                if (IsChecked)
+                {
+                    BlockOtherCheckBox(sender, item);
+                }
+                else
+                {
+                    ReleaseAllCheckBox(item);
+                }
+            }
+            CheckedCounter(IsChecked);
+        }
+
+        private void CheckedCounter(bool IsChecked)
+        {
+            if (IsChecked)
+            {
+                checkedCounters[currentQuestion]++;
+            }
+            else
+            {
+                checkedCounters[currentQuestion]--;
+            }
+        }
+
+        private static void ReleaseAllCheckBox(object item)
+        {
+            StackPanel spAnswer = item as StackPanel;
+            int cnt = spAnswer.Children.Count;
+            foreach (var itemBox in spAnswer.Children)
+            {
+                if (itemBox is CheckBox)
+                {
+                    (itemBox as CheckBox).IsEnabled = true;
+                }
+            }
+        }
+
+        private static void BlockOtherCheckBox(object sender, object item)
+        {
+            StackPanel spAnswer = item as StackPanel;
+            int cnt = spAnswer.Children.Count;
+            foreach (var itemBox in spAnswer.Children)
+            {
+                if (itemBox is CheckBox)
+                {
+                    if (itemBox != sender)
+                    {
+                        (itemBox as CheckBox).IsEnabled = false;
+                    }
+                }
+            }
+        }
+
+        private void CheckBoxChangedObjectiveSide(object sender, RoutedEventArgs e)
+        {
+            bool IsChecked = (sender as CheckBox).IsChecked == true;
+            foreach (var item in spObjectiveSideAnswers.Children)
+            {
+                if (IsChecked)
+                {
+                    BlockOtherCheckBox(sender, item);
+                }
+                else
+                {
+                    ReleaseAllCheckBox(item);
+                }
+            }
+            CheckedCounter(IsChecked);
+        }
+
+        private void CheckBoxChangedSubject(object sender, RoutedEventArgs e)
+        {
+            bool IsChecked = (sender as CheckBox).IsChecked == true;
+            foreach (var item in spSubjectAnswers.Children)
+            {
+                if (IsChecked)
+                {
+                    BlockOtherCheckBox(sender, item);
+                }
+                else
+                {
+                    ReleaseAllCheckBox(item);
+                }
+            }
+            CheckedCounter(IsChecked);
+        }
+
+        private void CheckBoxChangedSubjectiveSide(object sender, RoutedEventArgs e)
+        {
+            bool IsChecked = (sender as CheckBox).IsChecked == true;
+            foreach (var item in spSubjectiveSideAnswers.Children)
+            {
+                if (IsChecked)
+                {
+                    BlockOtherCheckBox(sender, item);
+                }
+                else
+                {
+                    ReleaseAllCheckBox(item);
+                }
+            }
+            CheckedCounter(IsChecked);
         }
 
         private void DeleteQuestion()
