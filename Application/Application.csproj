@@ -64,6 +64,7 @@
     <Compile Include="Question.xaml.cs">
       <DependentUpon>Question.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Subject.cs" />
     <Compile Include="Teacher.xaml.cs">
       <DependentUpon>Teacher.xaml</DependentUpon>
     </Compile>

@@ -19,6 +19,9 @@ namespace Application
     /// </summary>
     public partial class WTest : Window
     {
+        //Для каждого вопроса каждому последовательно ответу задается соответственный параметр:
+        //                                                                              1 - был ли отвечен вопрос
+        //                                                                              2 - на каждый ответ, как был отвечен
         private List<Tuple <List<bool>, List<bool>>> wasAnswerAndHow;
 
         private int right = 0, wrong = 0;
@@ -247,7 +250,49 @@ namespace Application
 
         private void DisableAllCheckBox()
         {
-            foreach (var answer in spAnswers.Children)
+            foreach (var answer in spObjectAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsEnabled = false;
+                        }
+                    }
+                }
+            }
+
+            foreach (var answer in spSubjectAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsEnabled = false;
+                        }
+                    }
+                }
+            }
+
+            foreach (var answer in spObjectiveSideAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsEnabled = false;
+                        }
+                    }
+                }
+            }
+
+            foreach (var answer in spSubjectiveSideAnswers.Children)
             {
                 if (answer is StackPanel)
                 {
@@ -262,10 +307,56 @@ namespace Application
             }
         }
 
+        //Переделать!
         private void SetValues()
         {
             int i = 0;
-            foreach (var answer in spAnswers.Children)
+            foreach (var answer in spObjectAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsChecked = wasAnswerAndHow[currentQuestion].Item2[i++];
+                        }
+                    }
+                }
+            }
+
+            i = 0;
+            foreach (var answer in spSubjectAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsChecked = wasAnswerAndHow[currentQuestion].Item2[i++];
+                        }
+                    }
+                }
+            }
+
+            i = 0;
+            foreach (var answer in spObjectiveSideAnswers.Children)
+            {
+                if (answer is StackPanel)
+                {
+                    foreach (var item in (answer as StackPanel).Children)
+                    {
+                        if (item is CheckBox)
+                        {
+                            (item as CheckBox).IsChecked = wasAnswerAndHow[currentQuestion].Item2[i++];
+                        }
+                    }
+                }
+            }
+
+            i = 0;
+            foreach (var answer in spSubjectiveSideAnswers.Children)
             {
                 if (answer is StackPanel)
                 {
@@ -323,7 +414,10 @@ namespace Application
 
         private void ShowQuestion()
         {
-            List<StackPanel> listAnswers = new List<StackPanel>();
+            List<StackPanel> listObjectAnswers = new List<StackPanel>();
+            List<StackPanel> listSubjectAnswers = new List<StackPanel>();
+            List<StackPanel> listObjectiveSideAnswers = new List<StackPanel>();
+            List<StackPanel> listSubjectiveSideAnswers = new List<StackPanel>();
             List<Answer> answers = questions[currentQuestion].GetAllAnswer();
             for (int i = 0; i < answers.Count; i++)
             {
@@ -333,7 +427,7 @@ namespace Application
                 chTrue.Margin = new Thickness(10, 5, 5, 5);
 
                 TextBlock tbAnswer = new TextBlock();
-                tbAnswer.Width = this.Width - 50;
+                //tbAnswer.Width = this.Width - 50;
                 tbAnswer.TextWrapping = TextWrapping.Wrap;
                 tbAnswer.Text = answers[i].Text;
                 tbAnswer.Margin = new Thickness(10, 5, 5, 5);
@@ -341,16 +435,44 @@ namespace Application
                 spAnswer.Children.Add(chTrue);
                 spAnswer.Children.Add(tbAnswer);
 
-                listAnswers.Add(spAnswer);
+                if (answers[i].Subject == "Объект")
+                {
+                    listObjectAnswers.Add(spAnswer);
+                }
+                else if (answers[i].Subject == "Субъект")
+                {
+                    listSubjectAnswers.Add(spAnswer);
+                }
+                else if (answers[i].Subject == "Субъектная сторона")
+                {
+                    listSubjectiveSideAnswers.Add(spAnswer);
+                }
+                else if (answers[i].Subject == "Объктная сторона")
+                {
+                    listObjectiveSideAnswers.Add(spAnswer);
+                }
+                //listAnswers.Add(spAnswer);
             }
 
             tbQuestion.Text = questions[currentQuestion].GetQuestion();
             tbQuestion.Width = this.Width - 15;
             tbQuestion.TextWrapping = TextWrapping.Wrap;
 
-            foreach (var spAnswer in listAnswers)
+            foreach (var spAnswer in listObjectAnswers)
             {
-                spAnswers.Children.Add(spAnswer);
+                spObjectAnswers.Children.Add(spAnswer);
+            }
+            foreach (var spAnswer in listSubjectAnswers)
+            {
+                spSubjectAnswers.Children.Add(spAnswer);
+            }
+            foreach (var spAnswer in listSubjectiveSideAnswers)
+            {
+                spSubjectiveSideAnswers.Children.Add(spAnswer);
+            }
+            foreach (var spAnswer in listObjectiveSideAnswers)
+            {
+                spObjectiveSideAnswers.Children.Add(spAnswer);
             }
 
             SetValues();
@@ -367,10 +489,28 @@ namespace Application
 
         private void DeleteQuestion()
         {
-            int count = spAnswers.Children.Count;
+            int count = spObjectAnswers.Children.Count;
             for (int i = count - 1; i >= 0; i--)
             {
-                spAnswers.Children.RemoveAt(i);
+                spObjectAnswers.Children.RemoveAt(i);
+            }
+
+            count = spSubjectAnswers.Children.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                spSubjectAnswers.Children.RemoveAt(i);
+            }
+
+            count = spObjectiveSideAnswers.Children.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                spObjectiveSideAnswers.Children.RemoveAt(i);
+            }
+
+            count = spSubjectiveSideAnswers.Children.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                spSubjectiveSideAnswers.Children.RemoveAt(i);
             }
 
             tbQuestion.Text = "";
@@ -378,18 +518,43 @@ namespace Application
 
         private void SaveValues()
         {
-            int i = 0;
-            foreach (var item in spAnswers.Children)
+            foreach (var item in spObjectAnswers.Children)
             {
-                StackPanel spAnswer = item as StackPanel;
-                int cnt = spAnswer.Children.Count;
-                foreach (var checkBox in spAnswer.Children)
+                SaveObjectValues(item);
+            }
+
+            foreach (var item in spSubjectAnswers.Children)
+            {
+                SaveObjectValues(item);
+            }
+
+            foreach (var item in spObjectiveSideAnswers.Children)
+            {
+                SaveObjectValues(item);
+            }
+
+            foreach (var item in spSubjectiveSideAnswers.Children)
+            {
+                SaveObjectValues(item);
+            }
+        }
+
+        private void SaveObjectValues(object item)
+        {
+            StackPanel spAnswer = item as StackPanel;
+            int cnt = spAnswer.Children.Count;
+            bool check = false;
+            foreach (var itemBox in spAnswer.Children)
+            {
+                if (itemBox is CheckBox)
                 {
-                    if (checkBox is CheckBox)
-                    {
-                        bool check = ((checkBox as CheckBox).IsChecked == true ? true : false);
-                        wasAnswerAndHow[currentQuestion].Item2[i++] = check;
-                    }
+                    check = ((itemBox as CheckBox).IsChecked == true ? true : false);
+                }
+                else if (itemBox is TextBlock)
+                {
+                    String textOfAnswer = (itemBox as TextBlock).Text;
+                    int index = questions[currentQuestion].GetIndexAnswer(textOfAnswer);
+                    wasAnswerAndHow[currentQuestion].Item2[index] = check;
                 }
             }
         }

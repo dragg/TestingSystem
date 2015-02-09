@@ -37,20 +37,31 @@ namespace Application
             {
                 lbAnswers.Items.Add(answer);
             }
+            SortListBox();
         }
 
         private void AddAnswer(object sender, RoutedEventArgs e)
         {
             if (tempAnswer.Text.ToString() != "")
             {
-                lbAnswers.Items.Add(new Answer(tempAnswer.Text.ToString(), (right.IsChecked != null ? (right.IsChecked == true ? true : false) : false)));
+                lbAnswers.Items.Add(new Answer(tempAnswer.Text.ToString(), 
+                    (right.IsChecked != null ? (right.IsChecked == true ? true : false) : false),
+                    cmbSubject.SelectionBoxItem as String));
                 tempAnswer.Clear();
                 right.IsChecked = false;
+                SortListBox();
             }
             else
             {
                 MessageBox.Show("Поле ввода ответа - пусто");
             }
+        }
+
+        private void SortListBox()
+        {
+            lbAnswers.Items.SortDescriptions.Clear();
+            lbAnswers.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Subject", System.ComponentModel.ListSortDirection.Ascending));
+            lbAnswers.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Right", System.ComponentModel.ListSortDirection.Descending));
         }
 
         private void DeleteAnswer(object sender, RoutedEventArgs e)
@@ -67,6 +78,7 @@ namespace Application
             {
                 tempAnswer.Text = (lbAnswers.Items[lbAnswers.SelectedIndex] as Answer).Text;
                 right.IsChecked = (lbAnswers.Items[lbAnswers.SelectedIndex] as Answer).Right;
+                cmbSubject.SelectedValue = (lbAnswers.Items[lbAnswers.SelectedIndex] as Answer).Subject;
                 lbAnswers.Items.RemoveAt(lbAnswers.SelectedIndex);
             }
         }
@@ -83,8 +95,10 @@ namespace Application
             }
         }
 
-        private void SaveQuestion(Question q = null)
+        private bool SaveQuestion(Question q = null)
         {
+            bool response = true;
+
             if (q == null)
             {
                 List<Answer> answers = new List<Answer>();
@@ -92,7 +106,16 @@ namespace Application
                 {
                     answers.Add(answer as Answer);
                 }
-                (this.Owner as WTeacher).AddQuestion(new Question(tbQuestion.Text, tbNote.Text.ToString(), answers, false));
+                Question question = new Question(tbQuestion.Text, tbNote.Text.ToString(), answers, false);
+                if (question.isValid())
+                {
+                    (this.Owner as WTeacher).AddQuestion(question);
+                }
+                else
+                {
+                    response = false;
+                }
+                
             }
             else
             {
@@ -101,6 +124,8 @@ namespace Application
             
             //(Parent as WTeacher)
             save = true;
+
+            return response;
         }
 
         private void SaveAndClose(object sender, RoutedEventArgs e)
@@ -126,13 +151,15 @@ namespace Application
                 {
                     MessageBox.Show("Нет ни одного верного ответа!");
                 }
-                else
+                //Save
+                if (SaveQuestion())
                 {
-                    //Save
-                    SaveQuestion();
-
                     //Close
                     this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Вопрос должен содержать один верный ответ в полях Объект, Субъект, Субъективная сторона и Объективная сторона!");
                 }
             }
         }

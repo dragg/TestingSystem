@@ -57,7 +57,21 @@
                 
                 <DockPanel Grid.Row="0">
                     <TextBlock DockPanel.Dock="Top" Height="15" Margin="10,10,10,0"  Text="Новый ответ:"/>
-                    <CheckBox DockPanel.Dock="Bottom" Content="Верный ответы" Height="16" Name="right" Margin="10,5,10,5"/>
+                    <Grid DockPanel.Dock="Bottom" Margin="10,5,10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <CheckBox Grid.Column="0" Content="Верный ответ" Height="16" Name="right"/>
+                        <ComboBox Grid.Column="1" Name="cmbSubject" SelectedValuePath="Content">
+                            <ComboBoxItem IsSelected="True">Объект</ComboBoxItem>
+                            <ComboBoxItem>Субъект</ComboBoxItem>
+                            <ComboBoxItem>Субъектная сторона</ComboBoxItem>
+                            <ComboBoxItem>Объктная сторона</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                    
                     <TextBox Name="tempAnswer" Margin="10,10,10,5" TextWrapping="Wrap"  AcceptsReturn="True"/>
                     
                 </DockPanel>

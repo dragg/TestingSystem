@@ -22,12 +22,75 @@
         </Grid>
 
         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Green" Margin="15"  Background="White">
-            
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <StackPanel  Orientation="Vertical" Name="spAnswers">
-                </StackPanel>
-            </ScrollViewer>
-            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Border BorderThickness="2" BorderBrush="Green" Margin="15"  Background="White">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" BorderThickness="0,0,0,2" BorderBrush="Green" Background="White">
+                                <TextBlock Background="AliceBlue" Height="30px" Text="Объект:" FontSize="20" TextAlignment="Center"/>
+                            </Border>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+                                <StackPanel  Orientation="Vertical" Name="spObjectAnswers">
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+                
+                <Grid Grid.Column="0" Grid.Row="1">
+                    <Border BorderThickness="2" BorderBrush="Green" Margin="15"  Background="White">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" BorderThickness="0,0,0,2" BorderBrush="Green" Background="White">
+                                <TextBlock Background="AliceBlue" Height="30px" Text="Объективная сторона:" FontSize="20" TextAlignment="Center"/>
+                            </Border>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+                                <StackPanel  Orientation="Vertical" Name="spObjectiveSideAnswers">
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+                
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Border BorderThickness="2" BorderBrush="Green" Margin="15"  Background="White">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" BorderThickness="0,0,0,2" BorderBrush="Green" Background="White">
+                                <TextBlock Background="AliceBlue" Height="30px" Text="Субъект:" FontSize="20" TextAlignment="Center"/>
+                            </Border>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+                                <StackPanel  Orientation="Vertical" Name="spSubjectAnswers">
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+                
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Border BorderThickness="2" BorderBrush="Green" Margin="15"  Background="White">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" BorderThickness="0,0,0,2" BorderBrush="Green" Background="White">
+                                <TextBlock Background="AliceBlue" Height="30px" Text="Субъективная сторона:" FontSize="20" TextAlignment="Center"/>
+                            </Border>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+                                <StackPanel  Orientation="Vertical" Name="spSubjectiveSideAnswers">
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+                
+                
+            </Grid>
         </Border>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

@@ -13,6 +13,45 @@ namespace Application
         List<Answer> answers;
         private bool NewQuestion = true;
 
+        public bool isValid()
+        {
+            bool response = true;
+
+            List<Answer> rightAnswers = new List<Answer>();
+
+            //Находим верные ответы
+            foreach (var answer in answers)
+            {
+                if (answer.isRight())
+                {
+                    rightAnswers.Add(answer);
+                }
+            }
+
+            //По каждому объекту(Объект, Субъект, ...) должно быть по одному ответы, поэтому всего 4
+            if (rightAnswers.Count == 4)
+            {
+                String s1 = rightAnswers[0].Subject,
+                    s2 = rightAnswers[1].Subject,
+                    s3 = rightAnswers[2].Subject,
+                    s4 = rightAnswers[3].Subject;
+
+                //Проверяем, чтобы не повторялись по объекту
+                if (!(s1 != s2 && s1 != s3 && s1 != s4 &&
+                    s2 != s3 && s2 != s4 &&
+                    s3 != s4))
+                {
+                    response = false;
+                }
+            }
+            else
+            {
+                response = false;
+            }
+
+            return response;
+        }
+
         public Question()
         {
             answers = new List<Answer>();
@@ -39,6 +78,20 @@ namespace Application
         public List<Answer> GetAllAnswer()
         {
             return new List<Answer>(answers);
+        }
+
+        public int GetIndexAnswer(String answer)
+        {
+            int i = 0;
+            foreach (var item in answers)
+            {
+                if (item.Text == answer)
+                {
+                    break;
+                }
+                i++;
+            }
+            return i;
         }
 
         public override String ToString()
