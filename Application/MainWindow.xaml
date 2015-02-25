@@ -10,13 +10,11 @@
         </Grid.Background>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Height="26" Margin="0,0,10,0" HorizontalAlignment="Left" Name="textBlock1" Text="Фамилия Имя Отчество:" VerticalAlignment="Top" MouseRightButtonDown="Grid_MouseLeftButtonDown"/>
+                <TextBlock Height="26" Margin="0,0,10,0" HorizontalAlignment="Left" Name="textBlock1" Text="Фамилия Имя Отчество:" VerticalAlignment="Top"/>
                 <TextBox Height="26" HorizontalAlignment="Left" Name="FIO" VerticalAlignment="Top" Width="227" />
             </StackPanel>
             <Button Content="Начать тест" Height="26" Margin="0,20,0,0" HorizontalAlignment="Center" Name="button1" VerticalAlignment="Top" Width="113" Click="BeginTest"  BorderBrush="#FFE22B2B" Background="#FF4EBDEB"/>
         </StackPanel>
-
-        <Button Name="btSetting" Content="Настройка" Height="26" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="140" Click="TeachersSettings"  BorderBrush="#FFE22B2B" Background="#FF4EBDEB" IsEnabled="False" />
 
 
     </Grid>

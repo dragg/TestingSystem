@@ -33,8 +33,6 @@ namespace Application
 
         private void TeachersSettings(object sender, RoutedEventArgs e)
         {
-            WTeacher teacherWindow = new WTeacher();
-            teacherWindow.Show();
         }
 
         private void BeginTest(object sender, RoutedEventArgs e)
@@ -62,8 +60,6 @@ namespace Application
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
-                btSetting.IsEnabled = !btSetting.IsEnabled;
         }
     }
 }
