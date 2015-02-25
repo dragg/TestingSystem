@@ -21,6 +21,8 @@ namespace Application
     {
         private bool result = false;
 
+        private bool note2 = false;
+
         private String note = "";
 
         public WInforming()
@@ -33,15 +35,23 @@ namespace Application
             this.Close();
         }
 
-        public void SaveInformation(bool result, String note)
+        public void SaveInformation(bool result, String note, bool note2 = false)
         {
+            this.note2 = note2;
             this.result = result;
             this.note = note;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            tbStatus.Text = result ? "Вы ответили верно!" : "Вы ошиблись!";
+            if (!note2)
+            {
+                tbStatus.Text = result ? "Вы ответили верно!" : "Вы ошиблись!";
+            }
+            else
+            {
+                tbStatus.Text = "";
+            }
             tbNote.Text = note;
         }
     }

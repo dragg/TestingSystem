@@ -711,5 +711,13 @@ namespace Application
             }
             return true;
         }
+
+        private void ShowNote2(object sender, RoutedEventArgs e)
+        {
+            WInforming wInformation = new WInforming();
+            wInformation.Owner = this;
+            wInformation.SaveInformation(IsRightAnswer(), questions[currentQuestion].GetNote2(), true);
+            wInformation.ShowDialog();
+        }
     }
 }

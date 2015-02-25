@@ -141,7 +141,11 @@ namespace Settings
 
         private void SaveAndClose(object sender, RoutedEventArgs e)
         {
-            if (tbQuestion.Text.ToString() == "" || tbNote.Text.ToString() == "" || lbAnswers.Items.Count == 0)
+            if (tbQuestion.Text.ToString() == "" || 
+                tbNote.Text.ToString() == "" || 
+                lbAnswers.Items.Count == 0 || 
+                tbNote2.Text.ToString() == "" ||
+                PathToFile == "")
             {
                 MessageBox.Show("Пожалуйста, заполните полностью вопрос или выйдите без сохранения!");
             }
