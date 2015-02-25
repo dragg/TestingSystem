@@ -1,0 +1,4 @@
+C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\CommonLibrary\bin\Debug\CommonLibrary.dll
+C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\CommonLibrary\bin\Debug\CommonLibrary.pdb
+C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\CommonLibrary\obj\Debug\CommonLibrary.dll
+C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\CommonLibrary\obj\Debug\CommonLibrary.pdb

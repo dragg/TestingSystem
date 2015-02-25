@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Application
+namespace CommonLibrary
 {
-    static class Helper
+    static public class Helper
     {
         public static String Separation = "\t\t\t";
         public static int DefaultCountQuestion = 10;

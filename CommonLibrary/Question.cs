@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Application
+namespace CommonLibrary
 {
     public class Question
     {
         private String Text;
         private String Note;
+        private String Note2;
+        private String PathToFile;
         List<Answer> answers;
         private bool NewQuestion = true;
 
@@ -57,11 +59,13 @@ namespace Application
             answers = new List<Answer>();
         }
 
-        public Question(String text, String note, List<Answer> answers = null, bool newQuestion = true)
+        public Question(String text, String note, String note2, String pathToFile, List<Answer> answers = null, bool newQuestion = true)
         {
             NewQuestion = newQuestion;
             Text = text;
             Note = note;
+            Note2 = note2;
+            PathToFile = pathToFile;
             this.answers = (answers == null ? new List<Answer>() : new List<Answer>(answers));
         }
 
@@ -109,9 +113,22 @@ namespace Application
             return Note;
         }
 
+        public String GetNote2()
+        {
+            return Note2;
+        }
+
+        public String GetPathToFile()
+        {
+            return PathToFile;
+        }
+
         public void WriteQuestion(StreamWriter write)
         {
-            write.WriteLine(Text + '\n' + Helper.Separation + '\n' + Note + '\n' + Helper.Separation);
+            write.WriteLine(Text + '\n' + Helper.Separation + '\n' + 
+                Note + '\n' + Helper.Separation + '\n' + 
+                Note2 + '\n' + Helper.Separation + '\n' + 
+                PathToFile);
             write.WriteLine(answers.Count);
             foreach (var answer in answers)
             {
