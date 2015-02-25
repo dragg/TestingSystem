@@ -125,10 +125,10 @@ namespace CommonLibrary
 
         public void WriteQuestion(StreamWriter write)
         {
-            write.WriteLine(Text + '\n' + Helper.Separation + '\n' + 
-                Note + '\n' + Helper.Separation + '\n' + 
-                Note2 + '\n' + Helper.Separation + '\n' + 
-                PathToFile);
+            write.WriteLine(Text + '\n' + Helper.Separation + 
+                '\n' + Note + '\n' + Helper.Separation +
+                '\n' + Note2 + '\n' + Helper.Separation +
+                '\n' + PathToFile + '\n' + Helper.Separation);
             write.WriteLine(answers.Count);
             foreach (var answer in answers)
             {
@@ -138,7 +138,11 @@ namespace CommonLibrary
 
         public void ReadQuestion(StreamReader read)
         {
-            String TextString = "", NoteString = "", tempString = "";
+            String TextString = "",
+                NoteString = "",
+                Note2String = "",
+                PathToFileString = "",
+                tempString = "";
             bool first = true;
             do
             {
@@ -158,9 +162,9 @@ namespace CommonLibrary
                 tempString = read.ReadLine();
             } while (tempString != Helper.Separation);
             TextString = TextString.Remove(TextString.Length - 1);
+
             tempString = "";
             first = true;
-
             do
             {
                 if (first)
@@ -180,8 +184,52 @@ namespace CommonLibrary
             } while (tempString != Helper.Separation);
             NoteString = NoteString.Remove(NoteString.Length - 1);
 
+            tempString = "";
+            first = true;
+            do
+            {
+                if (first)
+                {
+                    first = !first;
+                }
+                else
+                {
+                    Note2String += tempString + '\n';
+                }
+
+                if (tempString != "")
+                {
+                    //NoteString += '\n';
+                }
+                tempString = read.ReadLine();
+            } while (tempString != Helper.Separation);
+            Note2String = Note2String.Remove(Note2String.Length - 1);
+
+            tempString = "";
+            first = true;
+            do
+            {
+                if (first)
+                {
+                    first = !first;
+                }
+                else
+                {
+                    PathToFileString += tempString + '\n';
+                }
+
+                if (tempString != "")
+                {
+                    //NoteString += '\n';
+                }
+                tempString = read.ReadLine();
+            } while (tempString != Helper.Separation);
+            PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
+
             Text = TextString;
             Note = NoteString;
+            Note2 = Note2String;
+            PathToFile = PathToFileString;
             //String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
             //Text = TextAndNote[0];
             //Note = TextAndNote[1];

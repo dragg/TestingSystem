@@ -34,6 +34,8 @@ namespace Settings
             InitializeComponent();
             tbQuestion.Text = q.GetQuestion();
             tbNote.Text = q.GetNote();
+            tbNote2.Text = q.GetNote2();
+            tbPathToFile.Text = q.GetPathToFile();
             foreach (var answer in q.GetAllAnswer())
             {
                 lbAnswers.Items.Add(answer);
@@ -107,7 +109,12 @@ namespace Settings
                 {
                     answers.Add(answer as Answer);
                 }
-                Question question = new Question(tbQuestion.Text, tbNote.Text.ToString(), answers, false);
+                Question question = new Question(tbQuestion.Text,
+                    tbNote.Text.ToString(), 
+                    tbNote2.Text.ToString(),
+                    tbPathToFile.Text.ToString(), 
+                    answers,
+                    false);
                 if (question.isValid())
                 {
                     (this.Owner as WTeacher).AddQuestion(question);
