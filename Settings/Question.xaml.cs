@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CommonLibrary;
+using Microsoft.Win32;
 
 namespace Settings
 {
@@ -20,6 +21,8 @@ namespace Settings
     public partial class WQuestion : Window
     {
         Question question = null;
+
+        private String PathToFile = "";
 
         private bool save = false;
 
@@ -112,7 +115,7 @@ namespace Settings
                 Question question = new Question(tbQuestion.Text,
                     tbNote.Text.ToString(), 
                     tbNote2.Text.ToString(),
-                    tbPathToFile.Text.ToString(), 
+                    PathToFile, 
                     answers,
                     false);
                 if (question.isValid())
@@ -193,6 +196,18 @@ namespace Settings
                          SaveQuestion(question);
                     }
                 }
+            }
+        }
+
+        private void Select_file(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog myDialog = new OpenFileDialog();
+            myDialog.Filter = "Документ(*.doc;*.docx)|*.doc;*.docx";
+            myDialog.CheckFileExists = true;
+            if (myDialog.ShowDialog() == true)
+            {
+                PathToFile = myDialog.FileName;
+                tbPathToFile.Text = myDialog.SafeFileName;
             }
         }
     }

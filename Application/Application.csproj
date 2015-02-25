@@ -70,15 +70,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="NotSaverChange.xaml.cs">
-      <DependentUpon>NotSaverChange.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Question.xaml.cs">
-      <DependentUpon>Question.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Teacher.xaml.cs">
-      <DependentUpon>Teacher.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WInforming.xaml.cs">
       <DependentUpon>WInforming.xaml</DependentUpon>
     </Compile>
@@ -97,18 +88,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NotSaverChange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Question.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Teacher.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="WInforming.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -90,8 +90,14 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="5">
-            <TextBox Name="tbPathToFile">PathToFile</TextBox>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Name="tbPathToFile"  Margin="5">PathToFile</TextBlock>
+            <Button Grid.Column="1" Margin="5" Click="Select_file">Выбрать файл</Button>
         </Grid>
         
         <Button Grid.Row="3" Content="Сохранить вопрос" Height="26" HorizontalAlignment="Center" Name="btSave" VerticalAlignment="Center" Width="150" Click="SaveAndClose" Background="#FF4EBDEB" />
