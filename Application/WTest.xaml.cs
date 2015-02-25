@@ -165,25 +165,39 @@ namespace Application
 
         private void Finish(object sender, RoutedEventArgs e)
         {
-            StreamWriter writer;
-            FileInfo info = new FileInfo(Helper.PathToMembers);
-            
-            if (!info.Exists)
+            if (true)
             {
-                info.Create().Close();
-                
-                writer = info.AppendText();
-                writer.WriteLine("ФИО\tВсего вопросов\tПравильных ответов\tНеверных ответов");
-                writer.Close();
+                String message = "У вас неотвечены следующие вопросы: ";
+                bool first = true;
+                for (int i = 0; i < wasAnswerAndHow.Count; i++)
+                {
+                    message += (first ? "" : ", ") + (i + 1);
+                }
+                message += "!";
+                MessageBox.Show(message);
             }
-            writer = info.AppendText();
-            writer.WriteLine("{3}\t{0}\t{1}\t{2}", countQuestion, right, wrong, (this.Owner as MainWindow).FIO.Text);
-            writer.Close();
+            else
+            {
+                StreamWriter writer;
+                FileInfo info = new FileInfo(Helper.PathToMembers);
 
-            MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
+                if (!info.Exists)
+                {
+                    info.Create().Close();
 
-            this.Owner.Show();
-            this.Close();
+                    writer = info.AppendText();
+                    writer.WriteLine("ФИО\tВсего вопросов\tПравильных ответов\tНеверных ответов");
+                    writer.Close();
+                }
+                writer = info.AppendText();
+                writer.WriteLine("{3}\t{0}\t{1}\t{2}", countQuestion, right, wrong, (this.Owner as MainWindow).FIO.Text);
+                writer.Close();
+
+                MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
+
+                this.Owner.Show();
+                this.Close();
+            }
         }
 
         private void ShowNote(object sender, RoutedEventArgs e)
@@ -226,11 +240,14 @@ namespace Application
 
                 DisableAllCheckBox();
 
-                if (CheckAllAnswer())
-                    btFinish.IsEnabled = true;
+                //Now always is enabled!
+                //if (CheckAllAnswer())
+                //    btFinish.IsEnabled = true;
 
                 btNote.IsEnabled = true;
                 btToAnswer.IsEnabled = false;
+
+                ShowStatus();
             }
         }
 
@@ -504,6 +521,14 @@ namespace Application
             {
                 btToAnswer.IsEnabled = true;
             }
+
+            ShowStatus();
+        }
+
+        private void ShowStatus()
+        {
+            tbAnwerStatus.Text = (wasAnswerAndHow[currentQuestion].Item1[0] == false) ? ("Вопрос не был отвечен") : ("Был дан " + (IsRightAnswer() ? "верный" : "неверный") + " ответ");
+            tbPageStatus.Text = "Вопрос №" + (currentQuestion + 1) + " из " + countQuestion + " вопросов";
         }
 
         private void CheckBoxChangedObject(object sender, RoutedEventArgs e)
