@@ -23,6 +23,11 @@ namespace Application
         //Для каждого вопроса каждому последовательно ответу задается соответственный параметр:
         //                                                                              1 - был ли отвечен вопрос
         //                                                                              2 - на каждый ответ, как был отвечен
+
+        private bool closing_now = false;
+
+        private bool finish = false;
+
         private List<Tuple <List<bool>, List<bool>>> wasAnswerAndHow;
 
         private List<int> checkedCounters = new List<int>();
@@ -165,7 +170,7 @@ namespace Application
 
         private void Finish(object sender, RoutedEventArgs e)
         {
-            if (true)
+            if (!CheckAllAnswer())
             {
                 String message = "У вас неотвечены следующие вопросы: ";
                 bool first = true;
@@ -178,6 +183,8 @@ namespace Application
             }
             else
             {
+
+                finish = true;
                 StreamWriter writer;
                 FileInfo info = new FileInfo(Helper.PathToMembers);
 
@@ -195,8 +202,17 @@ namespace Application
 
                 MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
 
-                this.Owner.Show();
-                this.Close();
+                
+
+                Complete complete = new Complete();
+                complete.Owner = this.Owner;
+                complete.setQuestionAndResult(questions, wasAnswerAndHow);
+                complete.Show();
+
+                if (!closing_now)
+                {
+                    this.Close();
+                }
             }
         }
 
@@ -253,28 +269,7 @@ namespace Application
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            bool AllAnswers = true;
-            foreach (var item in wasAnswerAndHow)
-            {
-                if (item.Item1[0] == false)
-                {
-                    
-                    AllAnswers = false;
-                    break;
-                }
-            }
-
-            if (AllAnswers)
-            {
-                //Finish(sender, null);
-            }
-            else
-            {
-                //ShowDialog();
-                //MessageBox.("Вы действительно хотете выйти? Только кнопка Завершить сохранит все данные!");
-            }
-            this.Owner.Show();
-            this.Close();
+            
         }
 
         private void DisableAllCheckBox()
@@ -744,5 +739,43 @@ namespace Application
             wInformation.SaveInformation(IsRightAnswer(), questions[currentQuestion].GetNote2(), true);
             wInformation.ShowDialog();
         }
+
+        private void Closing_Window(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            //bool AllAnswers = true;
+            //foreach (var item in wasAnswerAndHow)
+            //{
+            //    if (item.Item1[0] == false)
+            //    {
+
+            //        AllAnswers = false;
+            //        break;
+            //    }
+            //}
+
+            //if (AllAnswers)
+            if (CheckAllAnswer())
+            {
+                this.closing_now = true;
+                if (!finish)
+                {
+                    Finish(sender, null);
+                }
+                e.Cancel = false;
+            }
+            else
+            {
+                var result = MessageBox.Show("Вы действительно хотете выйти? \nТолько кнопка \"Завершить\" сохранит все данные!", "Подтверждение выхода", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                
+                if (result == MessageBoxResult.OK)
+                {
+                    this.Owner.Show();
+                    e.Cancel = false;
+                }
+            }
+            
+        }
+
     }
 }

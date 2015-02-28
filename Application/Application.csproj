@@ -70,12 +70,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Complete.xaml.cs">
+      <DependentUpon>Complete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WInforming.xaml.cs">
       <DependentUpon>WInforming.xaml</DependentUpon>
     </Compile>
     <Compile Include="WTest.xaml.cs">
       <DependentUpon>WTest.xaml</DependentUpon>
     </Compile>
+    <Page Include="Complete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
