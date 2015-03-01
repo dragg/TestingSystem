@@ -20,6 +20,8 @@ namespace Application
     /// </summary>
     public partial class WTest : Window
     {
+        private String UserName = "";
+
         private bool closing_now = false;
 
         private bool finish = false;
@@ -195,11 +197,16 @@ namespace Application
                     info.Create().Close();
 
                     writer = info.AppendText();
-                    writer.WriteLine("ФИО\tВсего вопросов\tПравильных ответов\tНеверных ответов");
+                    writer.WriteLine("ФИО\t\t\t\t\tВсего вопросов\tПравильных ответов\tНеверных ответов");
                     writer.Close();
                 }
                 writer = info.AppendText();
-                writer.WriteLine("{3}\t{0}\t{1}\t{2}", countQuestion, right, wrong, (this.Owner as MainWindow).FIO.Text);
+                String str = "{3}";
+                for (int i = 0; i < 5 - UserName.Length / 8; i++)
+                {
+                    str += "\t";
+                }
+                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}", countQuestion, right, wrong, UserName);
                 writer.Close();
 
                 MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
@@ -208,7 +215,7 @@ namespace Application
 
                 Complete complete = new Complete();
                 complete.Owner = this.Owner;
-                complete.SetQuestionAndResult(questions, resultTest, (this.Owner as MainWindow).FIO.Text);
+                complete.SetQuestionAndResult(questions, resultTest, UserName);
                 complete.Show();
 
                 if (!closing_now)
@@ -781,5 +788,9 @@ namespace Application
             
         }
 
+        public void SetUserName(string name)
+        {
+            UserName = name;
+        }
     }
 }

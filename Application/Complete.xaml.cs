@@ -92,14 +92,13 @@ namespace Application
             {
                 //дата + ФИО прогодившего + название документа
                 var filename = System.IO.Path.GetFileName(questions[index].GetPathToFile());
-                var date = DateTime.Now.ToString().Replace('.', '-').Replace(':', '-');
-                var result = date + userName + filename;
-                pathToFile = Directory.GetCurrentDirectory() + " " + Helper.PathToResult + " " + result;
+                var date = DateTime.Now.Date.ToString().Replace('.', '-').Replace(':', '-');
+                var result = date + " " + userName + " " + filename;
+                pathToFile = Directory.GetCurrentDirectory() + Helper.PathToResult + result;
 
                 //Если файл открыт, то закрываем текущее окно
                 if (OpenFile(index))
                 {
-                    (this.Owner as MainWindow).FIO.Text = "";
                     this.Close();
                 }
             }
