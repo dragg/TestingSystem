@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using CommonLibrary;
+using System.Data;
 
 namespace Settings
 {
@@ -27,8 +28,18 @@ namespace Settings
 
         private List<Question> listQuestions = new List<Question>();
 
+        public DataTable QuestionData = new DataTable();
+
         public WTeacher()
         {
+            //Инициализируем колонки таблицы
+            QuestionData.Columns.Add("Number", typeof(String));
+
+            var col = new DataColumn("Question", typeof(String));
+            col.MaxLength = 200;
+            QuestionData.Columns.Add(col);
+
+            //Инициализируем остальные компоненты
             InitializeComponent();
         }
 
@@ -67,11 +78,28 @@ namespace Settings
 
         private void ShowQuestion()
         {
-            lbListQuestions.Items.Clear();
-            foreach (var question in listQuestions)
+            //Очищаем предыдущие данные
+            QuestionData.Rows.Clear();
+
+            //Задаем результаты в таблицу
+            for (int i = 0; i < listQuestions.Count; i++)
             {
-                lbListQuestions.Items.Add(question);
+                var row = QuestionData.NewRow();
+                QuestionData.Rows.Add(row);
+                row["Number"] = i + 1;
+                String question = listQuestions[i].GetQuestion();
+                row["Question"] = question.Substring(0, (question.Length > 120 ? 120 : question.Length));
             }
+
+            //Обновляем таблицу на форме
+            lbListQuestions.ItemsSource = QuestionData.AsDataView();
+
+
+            //lbListQuestions.Items.Clear();
+            //foreach (var question in listQuestions)
+            //{
+            //    lbListQuestions.Items.Add(question);
+            //}
             Changed = true;
         }
 
@@ -101,7 +129,8 @@ namespace Settings
 
         private void lbListQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbListQuestions.SelectedIndex != -1)
+            var index = lbListQuestions.SelectedIndex;
+            if (index != -1 && index < listQuestions.Count)
             {
                 btChangeQuestion.IsEnabled = btDeleteQuestion.IsEnabled = true;
             }
@@ -113,19 +142,21 @@ namespace Settings
 
         private void DeleteQuestion()
         {
-            if (lbListQuestions.SelectedIndex != -1)
+            var index = lbListQuestions.SelectedIndex;
+            if (index != -1 && index < listQuestions.Count)
             {
-                listQuestions.RemoveAt(lbListQuestions.SelectedIndex);
+                listQuestions.RemoveAt(index);
             }
             ShowQuestion();
         }
 
         private void ChangeQuestion()
         {
-            if (lbListQuestions.SelectedIndex != -1)
+            var index = lbListQuestions.SelectedIndex;
+            if (index != -1)
             {
-                Question q = listQuestions[lbListQuestions.SelectedIndex] as Question;
-                DeleteQuestion();
+                Question q = listQuestions[index] as Question;
+                //DeleteQuestion();
                 WQuestion wQuestion = new WQuestion(q);
                 wQuestion.Owner = this;
                 wQuestion.ShowDialog();
@@ -236,6 +267,12 @@ namespace Settings
                     e.Cancel = true;
                 }
             }
+        }
+
+        public void ChangeQuestion(Question q)
+        {
+            var index = lbListQuestions.SelectedIndex;
+            listQuestions[index] = q;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Settings
             tbQuestion.Text = q.GetQuestion();
             tbNote.Text = q.GetNote();
             tbNote2.Text = q.GetNote2();
-            tbPathToFile.Text = q.GetPathToFile();
+            PathToFile = tbPathToFile.Text = q.GetPathToFile();
             foreach (var answer in q.GetAllAnswer())
             {
                 lbAnswers.Items.Add(answer);
@@ -120,7 +120,7 @@ namespace Settings
                     false);
                 if (question.isValid())
                 {
-                    (this.Owner as WTeacher).AddQuestion(question);
+                    (this.Owner as WTeacher).ChangeQuestion(question);
                 }
                 else
                 {
@@ -130,7 +130,14 @@ namespace Settings
             }
             else
             {
-                (this.Owner as WTeacher).AddQuestion(q);
+                if (q.IsNewQuestion())
+                {
+                    (this.Owner as WTeacher).AddQuestion(q);
+                }
+                else
+                {
+                    (this.Owner as WTeacher).ChangeQuestion(question);
+                }
             }
             
             //(Parent as WTeacher)
