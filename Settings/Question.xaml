@@ -29,17 +29,24 @@
             
             <DockPanel Grid.Column="0">
                 <TextBlock DockPanel.Dock="Top" Height="15" Margin="10,10,10,0" Text="Вопрос:"/>
-                <TextBox DockPanel.Dock="Bottom" Margin="10,10,10,10" Name="tbQuestion" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10">
+                    <TextBox DockPanel.Dock="Bottom" Name="tbQuestion" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </ScrollViewer>
             </DockPanel>
             
             <DockPanel Grid.Column="1">
                 <TextBlock DockPanel.Dock="Top" Height="15" Margin="10,10,10,0" Text="Примечание:" />
-                <TextBox DockPanel.Dock="Bottom" Margin="10,10,10,10" Name="tbNote" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10">
+                    <TextBox DockPanel.Dock="Bottom" Name="tbNote" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </ScrollViewer>
+                
             </DockPanel>
 
             <DockPanel Grid.Column="2">
                 <TextBlock DockPanel.Dock="Top" Height="15" Margin="10,10,10,0" Text="Примечание2:" />
-                <TextBox DockPanel.Dock="Bottom" Margin="10,10,10,10" Name="tbNote2" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10">
+                    <TextBox DockPanel.Dock="Bottom" Name="tbNote2" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </ScrollViewer>
             </DockPanel>
         </Grid>
         
@@ -81,8 +88,11 @@
                             <ComboBoxItem>Объктная сторона</ComboBoxItem>
                         </ComboBox>
                     </Grid>
+
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="10,10,10,5">
+                        <TextBox Name="tempAnswer" TextWrapping="Wrap"  AcceptsReturn="True"/>
+                    </ScrollViewer>
                     
-                    <TextBox Name="tempAnswer" Margin="10,10,10,5" TextWrapping="Wrap"  AcceptsReturn="True"/>
                     
                 </DockPanel>
 
