@@ -28,6 +28,8 @@ namespace Application
 
         private String pathToFile = "";
 
+        private bool _continue = false;
+
         private List<Question> questions = null;
 
         private List<bool> resultTest;
@@ -128,6 +130,24 @@ namespace Application
                 MessageBox.Show("Файл протокола не найден.", "Ошибка", MessageBoxButton.OK);
             }
             return result;
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!_continue)
+            {
+                var result = MessageBox.Show("Вы действительно хотете выйти?", "Подтверждение выхода", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.OK)
+                {
+                    this.Owner.Show();
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+	        }
         }
     }
 }

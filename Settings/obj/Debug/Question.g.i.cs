@@ -40,7 +40,7 @@ namespace Settings {
     public partial class WQuestion : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 33 "..\..\Question.xaml"
+        #line 27 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox tbQuestion;
         
@@ -48,7 +48,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 40 "..\..\Question.xaml"
+        #line 34 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox tbNote;
         
@@ -56,7 +56,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 48 "..\..\Question.xaml"
+        #line 42 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox tbNote2;
         
@@ -64,7 +64,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 61 "..\..\Question.xaml"
+        #line 55 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btDeleteAnswer;
         
@@ -72,7 +72,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 62 "..\..\Question.xaml"
+        #line 56 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btChangeAnswer;
         
@@ -80,7 +80,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 65 "..\..\Question.xaml"
+        #line 59 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock textBlock2;
         
@@ -88,7 +88,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 66 "..\..\Question.xaml"
+        #line 60 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox lbAnswers;
         
@@ -96,7 +96,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 83 "..\..\Question.xaml"
+        #line 77 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox right;
         
@@ -104,7 +104,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 84 "..\..\Question.xaml"
+        #line 78 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cmbSubject;
         
@@ -112,7 +112,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 93 "..\..\Question.xaml"
+        #line 87 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox tempAnswer;
         
@@ -120,7 +120,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 99 "..\..\Question.xaml"
+        #line 93 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button button1;
         
@@ -128,7 +128,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 109 "..\..\Question.xaml"
+        #line 103 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock tbPathToFile;
         
@@ -136,7 +136,7 @@ namespace Settings {
         #line hidden
         
         
-        #line 113 "..\..\Question.xaml"
+        #line 107 "..\..\Question.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btSave;
         
@@ -199,7 +199,7 @@ namespace Settings {
             case 5:
             this.btDeleteAnswer = ((System.Windows.Controls.Button)(target));
             
-            #line 61 "..\..\Question.xaml"
+            #line 55 "..\..\Question.xaml"
             this.btDeleteAnswer.Click += new System.Windows.RoutedEventHandler(this.DeleteAnswer);
             
             #line default
@@ -208,7 +208,7 @@ namespace Settings {
             case 6:
             this.btChangeAnswer = ((System.Windows.Controls.Button)(target));
             
-            #line 62 "..\..\Question.xaml"
+            #line 56 "..\..\Question.xaml"
             this.btChangeAnswer.Click += new System.Windows.RoutedEventHandler(this.ChangeAnswer);
             
             #line default
@@ -220,7 +220,7 @@ namespace Settings {
             case 8:
             this.lbAnswers = ((System.Windows.Controls.ListBox)(target));
             
-            #line 66 "..\..\Question.xaml"
+            #line 60 "..\..\Question.xaml"
             this.lbAnswers.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.listAnswers_SelectionChanged);
             
             #line default
@@ -238,7 +238,7 @@ namespace Settings {
             case 12:
             this.button1 = ((System.Windows.Controls.Button)(target));
             
-            #line 99 "..\..\Question.xaml"
+            #line 93 "..\..\Question.xaml"
             this.button1.Click += new System.Windows.RoutedEventHandler(this.AddAnswer);
             
             #line default
@@ -249,7 +249,7 @@ namespace Settings {
             return;
             case 14:
             
-            #line 110 "..\..\Question.xaml"
+            #line 104 "..\..\Question.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Select_file);
             
             #line default
@@ -258,7 +258,7 @@ namespace Settings {
             case 15:
             this.btSave = ((System.Windows.Controls.Button)(target));
             
-            #line 113 "..\..\Question.xaml"
+            #line 107 "..\..\Question.xaml"
             this.btSave.Click += new System.Windows.RoutedEventHandler(this.SaveAndClose);
             
             #line default

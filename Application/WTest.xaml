@@ -31,12 +31,12 @@
         <Grid Grid.Row="1" Name="gridQuestion" Grid.RowSpan="2">
             <Border BorderThickness="2" BorderBrush="Blue" Margin="15"  Background="White">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBlock Padding="6,6,6,6" Name="tbQuestion" Text="" VerticalAlignment="Center" TextAlignment="Justify" />
+                    <TextBlock Padding="6,6,6,6" Name="tbQuestion" Text="" VerticalAlignment="Stretch" TextAlignment="Left"  TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
                 </ScrollViewer>
             </Border>
         </Grid>
 
-        <Border Grid.Column="1" Grid.Row="2" BorderThickness="2" BorderBrush="Green" Margin="15"  Background="White">
+        <Border Grid.Column="1" Grid.Row="2" BorderThickness="2" Margin="15">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
