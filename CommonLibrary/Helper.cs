@@ -14,5 +14,7 @@ namespace CommonLibrary
         public static String PathToSettings = "Settings.stg";
 
         public static String PathToMembers = "Members.txt";
+
+        public static String PathToResult = "\\Results\\";
     }
 }

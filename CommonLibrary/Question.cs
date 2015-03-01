@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 namespace CommonLibrary
 {
@@ -121,6 +122,16 @@ namespace CommonLibrary
         public String GetPathToFile()
         {
             return PathToFile;
+        }
+
+        public bool CheckFile()
+        {
+            return File.Exists(PathToFile);
+        }
+
+        public void CopyFileTo(String path)
+        {
+            File.Copy(PathToFile, path, true);
         }
 
         public void WriteQuestion(StreamWriter write)

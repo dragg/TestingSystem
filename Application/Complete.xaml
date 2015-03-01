@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Завершение" Height="900" Width="1200" MinHeight="450" MinWidth="680" WindowState="Maximized" Loaded="Window_Loaded_1" Closed="Window_Closed_1">
     <Grid>
-        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="255,294,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+
     </Grid>
 </Window>
