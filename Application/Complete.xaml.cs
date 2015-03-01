@@ -114,6 +114,11 @@ namespace Application
 
         private void CopyFile(int index)
         {
+            var directory = System.IO.Path.GetDirectoryName(pathToFile);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             questions[index].CopyFileTo(pathToFile);
         }
 
