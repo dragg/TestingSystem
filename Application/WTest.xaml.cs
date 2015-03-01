@@ -208,7 +208,7 @@ namespace Application
 
                 Complete complete = new Complete();
                 complete.Owner = this.Owner;
-                complete.setQuestionAndResult(questions, resultTest);
+                complete.SetQuestionAndResult(questions, resultTest, (this.Owner as MainWindow).FIO.Text);
                 complete.Show();
 
                 if (!closing_now)

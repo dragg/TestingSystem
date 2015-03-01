@@ -24,6 +24,8 @@ namespace Application
     {
         MainWindow mainWindow = null;
 
+        private String userName = "";
+
         private String pathToFile = "";
 
         private List<Question> questions = null;
@@ -34,19 +36,22 @@ namespace Application
 
         public Complete()
         {
+            //Инициализируем колонки таблицы
             QuestionData.Columns.Add("Number", typeof(String));
 
-            var col = new DataColumn("Question", typeof(String));// QuestionData.Columns.Add("Question", typeof(String));
+            var col = new DataColumn("Question", typeof(String));
             col.MaxLength = 200;
             QuestionData.Columns.Add(col);
 
             QuestionData.Columns.Add("Result", typeof(String));
 
+            //Инициализируем остальные компоненты
             InitializeComponent();
         }
 
-        private void setQuestionData()
+        private void SetQuestionData()
         {
+            //Задаем результаты в таблицу
             for (int i = 0; i < questions.Count; i++)
             {
                 var row = QuestionData.NewRow();
@@ -55,55 +60,75 @@ namespace Application
                 row["Question"] = questions[i].GetQuestion();
                 row["Result"] = resultTest[i] ? "Верно" : "Неверно";
             }
+
+            //Обновляем таблицу на форме
             dataGrid.ItemsSource = QuestionData.AsDataView();
         }
 
-        public void setWindow(MainWindow mainWindow)
-        {
-            this.mainWindow = mainWindow;
-        }
-
-        public void setQuestionAndResult(List<Question> questions, List<bool> result)
+        public void SetQuestionAndResult(List<Question> questions, List<bool> result, String name)
         {
             this.questions = questions;
             this.resultTest = result;
-            setQuestionData();
+            this.userName = name;
+
+            SetQuestionData();
         }
 
-        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             this.Owner.Hide();
         }
 
-        private void Window_Closed_1(object sender, EventArgs e)
+        private void WindowClosed(object sender, EventArgs e)
         {
             this.Owner.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void NextAndClose(object sender, RoutedEventArgs e)
         {
-            pathToFile = Directory.GetCurrentDirectory() + Helper.PathToResult + "1.docx";
-
-            OpenFile();
-        }
-
-        private void CopyFile()
-        {
-            questions[0].CopyFileTo(pathToFile);
-        }
-
-        private bool OpenFile()
-        {
-            if (questions[0].CheckFile())
+            var index = dataGrid.SelectedIndex;
+            //Проверяем, что выбран вопрос и то, что он был отвечен верно
+            if (index >= 0 && index < resultTest.Count && resultTest[index])
             {
-                CopyFile();
-                Process.Start(pathToFile);
+                //дата + ФИО прогодившего + название документа
+                var filename = System.IO.Path.GetFileName(questions[index].GetPathToFile());
+                var date = DateTime.Now.ToString().Replace('.', '-').Replace(':', '-');
+                var result = date + userName + filename;
+                pathToFile = Directory.GetCurrentDirectory() + " " + Helper.PathToResult + " " + result;
+
+                //Если файл открыт, то закрываем текущее окно
+                if (OpenFile(index))
+                {
+                    (this.Owner as MainWindow).FIO.Text = "";
+                    this.Close();
+                }
             }
             else
             {
-                MessageBox.Show("Файл протокола не найден.\nОбратитесь к преподавателю!", "Ошибка", MessageBoxButton.OK);
+                MessageBox.Show("Вы должны выбрать верно отвеченный вопрос");
             }
-            return true;
+            
+        }
+
+        private void CopyFile(int index)
+        {
+            questions[index].CopyFileTo(pathToFile);
+        }
+
+        private bool OpenFile(int index)
+        {
+            bool result = false;
+            if (questions[index].CheckFile())
+            {
+                CopyFile(index);
+                Process.Start(pathToFile);
+                result = true;
+            }
+            else
+            {
+                MessageBox.Show("Файл протокола не найден.", "Ошибка", MessageBoxButton.OK);
+            }
+            return result;
         }
     }
 }
