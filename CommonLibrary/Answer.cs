@@ -53,12 +53,19 @@ namespace CommonLibrary
 
         public void WriteAnswer(StreamWriter writer)
         {
-            writer.WriteLine(Text + '\n' + Helper.Separation + '\n' + Right + '\n' + subjects[Subject]);
+            writer.WriteLine(Crypting.Encrypt(Text, Helper.Key));
+            writer.WriteLine("\n");
+            writer.WriteLine(Helper.Separation);
+            writer.WriteLine("\n");
+            writer.WriteLine(Crypting.Encrypt(Right.ToString(), Helper.Key));
+            writer.WriteLine("\n");
+            writer.WriteLine(Crypting.Encrypt(subjects[Subject].ToString(), Helper.Key));
         }
 
         public void ReadAnswer(StreamReader read)
         {
-            String answer = "", right = "", tempString = "";
+            String answer = "", right = "", tempString = "",
+                temp = "";
             bool first = true;
             int subject = 0;
             do
@@ -69,20 +76,34 @@ namespace CommonLibrary
                 }
                 else
                 {
-                    answer += tempString + '\n';
+                    if (temp != "")
+                    {
+                        answer += tempString + '\n';
+                    }
                 }
 
                 if (tempString != "")
                 {
                     //answer += '\n';
                 }
-                tempString = read.ReadLine();
-            } while (tempString != Helper.Separation);
+                temp = read.ReadLine();
+                tempString = Crypting.Decrypt(temp, Helper.Key);
+            } while (temp != Helper.Separation);
             answer = answer.Remove(answer.Length - 1);
 
-            right = read.ReadLine();
+            temp = "";
+            while (temp == "")
+            {
+                temp = read.ReadLine();
+            }
+            right = Crypting.Decrypt(temp, Helper.Key);
 
-            subject = Int32.Parse(read.ReadLine());
+            temp = "";
+            while (temp == "")
+            {
+                temp = read.ReadLine();
+            }
+            subject = Int32.Parse(Crypting.Decrypt(temp, Helper.Key));
 
             Text = answer;
             Right = Boolean.Parse(right);

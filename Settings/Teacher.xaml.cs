@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using System.IO;
 using CommonLibrary;
 using System.Data;
+using CommonLibrary;
 
 namespace Settings
 {
@@ -185,7 +186,8 @@ namespace Settings
                 if (file.Exists == true)
                 {
                     StreamReader read_text = new StreamReader(fileName);
-                    String countQuestion = read_text.ReadLine();
+                    String countQuestion = Crypting.Decrypt(read_text.ReadLine(), Helper.Key);
+                    
                     int cnt = Int32.Parse(countQuestion);
                     for (int i = 0; i < cnt; i++)
                     {
@@ -217,10 +219,11 @@ namespace Settings
                     file.Delete();
                 }
 
+
                 StreamWriter write_text;
                 write_text = file.AppendText();
 
-                write_text.WriteLine(listQuestions.Count);
+                write_text.WriteLine(Crypting.Encrypt(listQuestions.Count.ToString(), Helper.Key));
                 foreach (var question in listQuestions)
                 {
                     question.WriteQuestion(write_text);

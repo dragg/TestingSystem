@@ -12,6 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using CommonLibrary;
+using System.IO; 
+using System.Text; 
+using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace Application
 {
