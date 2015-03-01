@@ -250,10 +250,11 @@ namespace Settings
                 writer.WriteLine(cnt);
                 writer.WriteLine(path);
                 writer.Close();
+                MessageBox.Show("Настройки успешно сохранены!", "Успех", MessageBoxButton.OK);
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Не удалось применить. Проверьте вверность вводимых данных!");
+                MessageBox.Show("Не удалось сохранить настройки!", "Ошибка", MessageBoxButton.OK);
             }
         }
 
