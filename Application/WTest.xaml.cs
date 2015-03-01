@@ -20,14 +20,15 @@ namespace Application
     /// </summary>
     public partial class WTest : Window
     {
-        //Для каждого вопроса каждому последовательно ответу задается соответственный параметр:
-        //                                                                              1 - был ли отвечен вопрос
-        //                                                                              2 - на каждый ответ, как был отвечен
-
         private bool closing_now = false;
 
         private bool finish = false;
 
+        private List<bool> resultTest = new List<bool>();
+
+        //Для каждого вопроса каждому последовательно ответу задается соответственный параметр:
+        //                                                                              1 - был ли отвечен вопрос
+        //                                                                              2 - на каждый ответ, как был отвечен
         private List<Tuple <List<bool>, List<bool>>> wasAnswerAndHow;
 
         private List<int> checkedCounters = new List<int>();
@@ -64,6 +65,7 @@ namespace Application
                 }
                 for (int i = 0; i < countQuestion; i++)
                 {
+                    resultTest.Add(false);
                     Question q = new Question();
                     q.ReadQuestion(reader);
                     AllQuestions.Add(q);
@@ -79,7 +81,7 @@ namespace Application
 
                 if (AllQuestions.Count < this.countQuestion)
                 {
-                    throw new Exception("Question error!");
+                    throw new Exception("Количество вопросов меньше, чем задано для теста!");
                 }
                 else
                 {
@@ -206,7 +208,7 @@ namespace Application
 
                 Complete complete = new Complete();
                 complete.Owner = this.Owner;
-                complete.setQuestionAndResult(questions, wasAnswerAndHow);
+                complete.setQuestionAndResult(questions, resultTest);
                 complete.Show();
 
                 if (!closing_now)
@@ -721,9 +723,11 @@ namespace Application
                 {
                     if (wasAnswerAndHow[currentQuestion].Item2[i] != listAnswers[i].Right)
                     {
+                        resultTest[currentQuestion] = false;
                         throw new Exception("Неверный ответ!");
                     }
                 }
+                resultTest[currentQuestion] = true;
             }
             catch (Exception ex)
             {

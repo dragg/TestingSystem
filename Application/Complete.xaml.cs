@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using CommonLibrary;
 using System.IO;
 using System.Diagnostics;
+using System.Data;
 
 namespace Application
 {
@@ -27,11 +28,34 @@ namespace Application
 
         private List<Question> questions = null;
 
-        private List<Tuple<List<bool>, List<bool>>> wasAnswerAndHow;
+        private List<bool> resultTest;
+
+        public DataTable QuestionData = new DataTable();
 
         public Complete()
         {
+            QuestionData.Columns.Add("Number", typeof(String));
+
+            var col = new DataColumn("Question", typeof(String));// QuestionData.Columns.Add("Question", typeof(String));
+            col.MaxLength = 200;
+            QuestionData.Columns.Add(col);
+
+            QuestionData.Columns.Add("Result", typeof(String));
+
             InitializeComponent();
+        }
+
+        private void setQuestionData()
+        {
+            for (int i = 0; i < questions.Count; i++)
+            {
+                var row = QuestionData.NewRow();
+                QuestionData.Rows.Add(row);
+                row["Number"] = i + 1;
+                row["Question"] = questions[i].GetQuestion();
+                row["Result"] = resultTest[i] ? "Верно" : "Неверно";
+            }
+            dataGrid.ItemsSource = QuestionData.AsDataView();
         }
 
         public void setWindow(MainWindow mainWindow)
@@ -39,10 +63,11 @@ namespace Application
             this.mainWindow = mainWindow;
         }
 
-        public void setQuestionAndResult(List<Question> questions, List<Tuple<List<bool>, List<bool>>> wasAnswerAndHow)
+        public void setQuestionAndResult(List<Question> questions, List<bool> result)
         {
             this.questions = questions;
-            this.wasAnswerAndHow = wasAnswerAndHow;
+            this.resultTest = result;
+            setQuestionData();
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
