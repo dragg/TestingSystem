@@ -17,6 +17,6 @@ namespace CommonLibrary
 
         public static String PathToResult = "\\Results\\";
 
-        public static String Key = "";
+        public static String Key = "Secret Key";
     }
 }

@@ -64,7 +64,7 @@ namespace Application
 
                 List<Question> AllQuestions = new List<Question>();
                 reader = new StreamReader(path);
-                int countQuestion = Int32.Parse(reader.ReadLine());
+                int countQuestion = Int32.Parse(Crypting.Decrypt(reader.ReadLine(), Helper.Key));
                 if (countQuestion == 1)
                 {
                     btNext.IsEnabled = false;
@@ -125,7 +125,6 @@ namespace Application
             }
             else
             {
-
                 wasAnswerAndHow = new List<Tuple<List<bool>, List<bool>>>();
                 foreach (var q in questions)
                 {

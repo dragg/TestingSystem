@@ -101,6 +101,7 @@ namespace Application
                 //Если файл открыт, то закрываем текущее окно
                 if (OpenFile(index))
                 {
+                    _continue = true;
                     this.Close();
                 }
             }

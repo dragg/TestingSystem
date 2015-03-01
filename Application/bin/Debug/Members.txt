@@ -4,3 +4,7 @@
 ff					1		1			0
 f					1		1			0
 fsd					1		1			0
+fasd					1		1			0
+dasf					1		1			0
+fd					1		1			0
+fas					1		1			0
