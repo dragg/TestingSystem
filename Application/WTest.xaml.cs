@@ -139,7 +139,7 @@ namespace Application
 
                     checkedCounters.Add(0);
                 }
-                ShowQuestion();
+                //ShowQuestion();
             }
         }
 
@@ -200,7 +200,7 @@ namespace Application
                     info.Create().Close();
 
                     writer = info.AppendText();
-                    writer.WriteLine("ФИО\t\t\t\t\tВсего вопросов\tПравильных ответов\tНеверных ответов");
+                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов");
                     writer.Close();
                 }
                 writer = info.AppendText();
@@ -212,7 +212,7 @@ namespace Application
                 writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}", countQuestion, right, wrong, UserName);
                 writer.Close();
 
-                MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
+                //MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
 
                 
 
@@ -454,6 +454,7 @@ namespace Application
             List<StackPanel> listObjectiveSideAnswers = new List<StackPanel>();
             List<StackPanel> listSubjectiveSideAnswers = new List<StackPanel>();
             List<Answer> answers = questions[currentQuestion].GetAllAnswer();
+            var width = (mainWindow.Width - 600 - 100) / 2 - 50;
             for (int i = 0; i < answers.Count; i++)
             {
                 StackPanel spAnswer = new StackPanel();
@@ -462,7 +463,8 @@ namespace Application
                 chTrue.Margin = new Thickness(10, 5, 5, 5);
 
                 TextBlock tbAnswer = new TextBlock();
-                //tbAnswer.Width = this.Width - 50;
+                tbAnswer.Width = width;
+                
                 tbAnswer.TextWrapping = TextWrapping.Wrap;
                 tbAnswer.Text = answers[i].Text;
                 tbAnswer.Margin = new Thickness(10, 5, 5, 5);
@@ -498,8 +500,8 @@ namespace Application
             }
 
             tbQuestion.Text = questions[currentQuestion].GetQuestion();
-            tbQuestion.Width = this.Width - 15;
-            tbQuestion.TextWrapping = TextWrapping.Wrap;
+            //tbQuestion.Width = this.Width - 15;
+            //tbQuestion.TextWrapping = TextWrapping.Wrap;
 
             foreach (var spAnswer in listObjectAnswers)
             {
@@ -534,8 +536,8 @@ namespace Application
 
         private void ShowStatus()
         {
-            tbAnwerStatus.Text = (wasAnswerAndHow[currentQuestion].Item1[0] == false) ? ("Вопрос не был отвечен") : ("Был дан " + (IsRightAnswer() ? "верный" : "неверный") + " ответ");
-            tbPageStatus.Text = "Вопрос №" + (currentQuestion + 1) + " из " + countQuestion + " вопросов";
+            tbAnwerStatus.Text = (wasAnswerAndHow[currentQuestion].Item1[0] == false) ? ("Квалификация не осуществлена") : ("Был дан " + (IsRightAnswer() ? "верный" : "неверный") + " ответ");
+            tbPageStatus.Text = "Фабула №" + (currentQuestion + 1) + " из " + countQuestion + "";
         }
 
         private void CheckBoxChangedObject(object sender, RoutedEventArgs e)
@@ -794,6 +796,11 @@ namespace Application
         public void SetUserName(string name)
         {
             UserName = name;
+        }
+
+        private void Window_ContentRendered_1(object sender, EventArgs e)
+        {
+            ShowQuestion();
         }
     }
 }

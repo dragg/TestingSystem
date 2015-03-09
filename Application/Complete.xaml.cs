@@ -59,7 +59,8 @@ namespace Application
                 var row = QuestionData.NewRow();
                 QuestionData.Rows.Add(row);
                 row["Number"] = i + 1;
-                row["Question"] = questions[i].GetQuestion();
+                var question = questions[i].GetQuestion();
+                row["Question"] = (question.Length > 200) ?  question.Substring(0, 200) : question;
                 row["Result"] = resultTest[i] ? "Верно" : "Неверно";
             }
 
@@ -99,11 +100,7 @@ namespace Application
                 pathToFile = Directory.GetCurrentDirectory() + Helper.PathToResult + result;
 
                 //Если файл открыт, то закрываем текущее окно
-                if (OpenFile(index))
-                {
-                    _continue = true;
-                    this.Close();
-                }
+                OpenFile(index);
             }
             else
             {
@@ -140,20 +137,22 @@ namespace Application
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!_continue)
-            {
-                var result = MessageBox.Show("Вы действительно хотете выйти?", "Подтверждение выхода", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var result = MessageBox.Show("Вы действительно хотете выйти?", "Подтверждение выхода", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
-                if (result == MessageBoxResult.OK)
-                {
-                    this.Owner.Show();
-                    e.Cancel = false;
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
-	        }
+            if (result == MessageBoxResult.OK)
+            {
+                this.Owner.Show();
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

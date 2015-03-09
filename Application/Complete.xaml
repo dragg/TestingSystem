@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
-        Title="Завершение" Height="900" Width="1200" MinHeight="450" MinWidth="680" WindowState="Maximized" Loaded="WindowLoaded" Closed="WindowClosed" Closing="WindowClosing">
+        Title="Завершение" Height="900" Width="1200" MinHeight="450" MinWidth="680" WindowState="Maximized" Loaded="WindowLoaded" Closed="WindowClosed" Closing="WindowClosing" WindowStyle="None">
     <Grid>
         <Grid.Background>
             <!--<ImageBrush ImageSource="pack://application:,,,/Resources/background.png" />-->
@@ -29,11 +29,12 @@
                 <dg:DataGridTextColumn Binding="{Binding Result}" Header="Вы ответили" IsReadOnly="True" />
             </dg:DataGrid.Columns>
         </dg:DataGrid>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="200, 10, 10, 10" Grid.ColumnSpan="2">
+            <Button Click="NextAndClose" Margin="15, 0, 15, 0" MinWidth="120px">Начать работу с документами</Button>
+            <Button Click="Close" Margin="15, 0, 15, 0" MinWidth="120px">Завершить работу с тренажером</Button>
+        </StackPanel>
         
-        
-        
-        <DockPanel Grid.Row="2" Grid.Column="3" Margin="15">
-            <Button Click="NextAndClose" DockPanel.Dock="Left" Margin="15, 0, 15, 0" MaxWidth="120px">Продолжить</Button>
-        </DockPanel>
     </Grid>
 </Window>

@@ -120,7 +120,7 @@ namespace Settings
                     false);
                 if (question.isValid())
                 {
-                    (this.Owner as WTeacher).AddQuestion(question);
+                    (this.Owner as WTeacher).ChangeQuestion(question);
                 }
                 else
                 {

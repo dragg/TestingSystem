@@ -157,7 +157,6 @@ namespace Settings
             if (index != -1)
             {
                 Question q = listQuestions[index] as Question;
-                //DeleteQuestion();
                 WQuestion wQuestion = new WQuestion(q);
                 wQuestion.Owner = this;
                 wQuestion.ShowDialog();

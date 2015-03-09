@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Application.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Стартовое окно" Height="700" Width="900" MinHeight="700" MinWidth="900" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Background="AliceBlue" FontSize="14" FontWeight="Bold" WindowState="Maximized" Closed="WindowClosed">
+        Title="Стартовое окно" Height="700" Width="900" MinHeight="700" MinWidth="900" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Background="AliceBlue" FontSize="14" FontWeight="Bold" WindowState="Maximized" Closed="WindowClosed" WindowStyle="None">
     
     <Grid Background="White">
 
