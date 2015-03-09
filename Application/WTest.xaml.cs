@@ -536,7 +536,7 @@ namespace Application
 
         private void ShowStatus()
         {
-            tbAnwerStatus.Text = (wasAnswerAndHow[currentQuestion].Item1[0] == false) ? ("Квалификация не осуществлена") : ("Был дан " + (IsRightAnswer() ? "верный" : "неверный") + " ответ");
+            tbAnwerStatus.Text = (wasAnswerAndHow[currentQuestion].Item1[0] == false) ? ("Квалификация не осуществлена") : ("Квалификация осуществлена " + (IsRightAnswer() ? "верно" : "неверно"));
             tbPageStatus.Text = "Фабула №" + (currentQuestion + 1) + " из " + countQuestion + "";
         }
 
