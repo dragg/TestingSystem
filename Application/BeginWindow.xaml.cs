@@ -30,5 +30,10 @@ namespace Application
             this.Hide();
             window.Show();
         }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

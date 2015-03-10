@@ -34,6 +34,8 @@ namespace Application
 
         private List<bool> resultTest;
 
+        private List<int> continueDoc = new List<int>();
+
         public DataTable QuestionData = new DataTable();
 
         public Complete()
@@ -80,19 +82,43 @@ namespace Application
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             this.Owner.Hide();
+
+            int countRight = 0, total = 0;
+            foreach (var item in resultTest)
+            {
+                if (item)
+                {
+                    countRight++;
+                }
+                total++;
+            }
+            tbResult.Text = "Вы верно квалифицировали " + countRight + " из " + total + " фабул";
         }
 
         private void WindowClosed(object sender, EventArgs e)
         {
+            this.Owner.Hide();
             this.Owner.Show();
             this.Owner.Focus();
+        }
+
+        private bool isAnswer(int index)
+        {
+            foreach (var item in continueDoc)
+            {
+                if (item == index)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void NextAndClose(object sender, RoutedEventArgs e)
         {
             var index = dataGrid.SelectedIndex;
             //Проверяем, что выбран вопрос и то, что он был отвечен верно
-            if (index >= 0 && index < resultTest.Count && resultTest[index])
+            if (index >= 0 && index < resultTest.Count && resultTest[index] && !isAnswer(index))
             {
                 //дата + ФИО прогодившего + название документа
                 var filename = System.IO.Path.GetFileName(questions[index].GetPathToFile());
@@ -100,6 +126,8 @@ namespace Application
                 var result = date + " " + userName + " " + filename;
                 pathToFile = Directory.GetCurrentDirectory() + Helper.PathToResult + result;
 
+                continueDoc.Add(index);
+                btNext.IsEnabled = false;
                 //Если файл открыт, то закрываем текущее окно
                 OpenFile(index);
             }
@@ -154,6 +182,21 @@ namespace Application
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void dataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var index = dataGrid.SelectedIndex;
+
+            //Проверяем, что выбран вопрос и то, что он был отвечен верно
+            if (index >= 0 && index < resultTest.Count && resultTest[index] && !isAnswer(index))
+            {
+                btNext.IsEnabled = true;
+            }
+            else
+            {
+                btNext.IsEnabled = false;
+            }
         }
     }
 }

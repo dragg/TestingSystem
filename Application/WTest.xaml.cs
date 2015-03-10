@@ -32,6 +32,8 @@ namespace Application
 
         private List<bool> resultTest = new List<bool>();
 
+        DateTime begin;
+
         //Для каждого вопроса каждому последовательно ответу задается соответственный параметр:
         //                                                                              1 - был ли отвечен вопрос
         //                                                                              2 - на каждый ответ, как был отвечен
@@ -152,7 +154,7 @@ namespace Application
             }
             else
             {
-                btNote.IsEnabled = false;
+                //btNote.IsEnabled = false;
             }
 
             DeleteQuestion();//Убираем отображение старого вопроса
@@ -168,7 +170,7 @@ namespace Application
             }
             else
             {
-                btNote.IsEnabled = false;
+                //btNote.IsEnabled = false;
             }
 
             DeleteQuestion();//Убираем отображение старого вопроса
@@ -179,11 +181,12 @@ namespace Application
         {
             if (!CheckAllAnswer())
             {
-                String message = "У вас неотвечены следующие вопросы: ";
+                String message = "У вас не квалифицицированы следующие фабулы: ";
                 bool first = true;
                 for (int i = 0; i < wasAnswerAndHow.Count; i++)
                 {
                     message += (first ? "" : ", ") + (i + 1);
+                    first = false;
                 }
                 message += "!";
                 MessageBox.Show(message);
@@ -200,7 +203,7 @@ namespace Application
                     info.Create().Close();
 
                     writer = info.AppendText();
-                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов");
+                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов\tДата\t\tВремя в минутах");
                     writer.Close();
                 }
                 writer = info.AppendText();
@@ -209,7 +212,7 @@ namespace Application
                 {
                     str += "\t";
                 }
-                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}", countQuestion, right, wrong, UserName);
+                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}\t\t\t{4}\t{5}", countQuestion, right, wrong, UserName, DateTime.Now.Date.ToShortDateString(), (int)((DateTime.Now - begin).TotalMinutes));
                 writer.Close();
 
                 //MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
@@ -801,6 +804,7 @@ namespace Application
         private void Window_ContentRendered_1(object sender, EventArgs e)
         {
             ShowQuestion();
+            begin = DateTime.Now;
         }
 
         private void openFile2(object sender, RoutedEventArgs e)

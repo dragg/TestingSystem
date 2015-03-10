@@ -48,7 +48,7 @@ namespace Settings
             {
                 lbAnswers.Items.Add(answer);
             }
-            SortListBox();
+            //SortListBox();
         }
 
         private void AddAnswer(object sender, RoutedEventArgs e)
@@ -60,7 +60,7 @@ namespace Settings
                     cmbSubject.SelectionBoxItem as String));
                 tempAnswer.Clear();
                 right.IsChecked = false;
-                SortListBox();
+                //SortListBox();
             }
             else
             {
