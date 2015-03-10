@@ -22,7 +22,8 @@ namespace Settings
     {
         Question question = null;
 
-        private String PathToFile = "";
+        private String PathToFile = "",
+            PathToFile2 = "";
 
         private bool save = false;
 
@@ -38,7 +39,11 @@ namespace Settings
             tbQuestion.Text = q.GetQuestion();
             tbNote.Text = q.GetNote();
             tbNote2.Text = q.GetNote2();
-            PathToFile = tbPathToFile.Text = q.GetPathToFile();
+
+            PathToFile = q.GetPathToFile();
+            tbPathToFile.Text = System.IO.Path.GetFileName(PathToFile);
+            PathToFile2 = q.GetPathToFile2();
+            tbPathToFile2.Text = System.IO.Path.GetFileName(PathToFile2);
             foreach (var answer in q.GetAllAnswer())
             {
                 lbAnswers.Items.Add(answer);
@@ -115,12 +120,21 @@ namespace Settings
                 Question question = new Question(tbQuestion.Text,
                     tbNote.Text.ToString(), 
                     tbNote2.Text.ToString(),
-                    PathToFile, 
+                    PathToFile,
+                    PathToFile2,
                     answers,
-                    false);
+                    ((this.question == null) ? true : false));
                 if (question.isValid())
                 {
-                    (this.Owner as WTeacher).ChangeQuestion(question);
+                    if (question.IsNewQuestion())
+                    {
+                        (this.Owner as WTeacher).AddQuestion(question);
+                    }
+                    else
+                    {
+                        (this.Owner as WTeacher).ChangeQuestion(question);
+                    }
+                    
                 }
                 else
                 {
@@ -219,6 +233,18 @@ namespace Settings
             {
                 PathToFile = myDialog.FileName;
                 tbPathToFile.Text = myDialog.SafeFileName;
+            }
+        }
+
+        private void selectFile2(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog myDialog = new OpenFileDialog();
+            myDialog.Filter = "Документ(*.doc;*.docx)|*.doc;*.docx";
+            myDialog.CheckFileExists = true;
+            if (myDialog.ShowDialog() == true)
+            {
+                PathToFile2 = myDialog.FileName;
+                tbPathToFile2.Text = myDialog.SafeFileName;
             }
         }
     }

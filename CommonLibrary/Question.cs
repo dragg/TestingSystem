@@ -13,6 +13,7 @@ namespace CommonLibrary
         private String Note;
         private String Note2;
         private String PathToFile;
+        private String PathToFile2;
         List<Answer> answers;
         private bool NewQuestion = true;
 
@@ -60,13 +61,14 @@ namespace CommonLibrary
             answers = new List<Answer>();
         }
 
-        public Question(String text, String note, String note2, String pathToFile, List<Answer> answers = null, bool newQuestion = true)
+        public Question(String text, String note, String note2, String pathToFile, String pathToFile2, List<Answer> answers = null, bool newQuestion = true)
         {
             NewQuestion = newQuestion;
             Text = text;
             Note = note;
             Note2 = note2;
             PathToFile = pathToFile;
+            PathToFile2 = pathToFile2;
             this.answers = (answers == null ? new List<Answer>() : new List<Answer>(answers));
         }
 
@@ -124,6 +126,11 @@ namespace CommonLibrary
             return PathToFile;
         }
 
+        public String GetPathToFile2()
+        {
+            return PathToFile2;
+        }
+
         public bool CheckFile()
         {
             return File.Exists(PathToFile);
@@ -148,6 +155,9 @@ namespace CommonLibrary
             write.WriteLine(Crypting.Encrypt(PathToFile, Helper.Key));
             write.WriteLine("\n");
             write.WriteLine(Helper.Separation);
+            write.WriteLine(Crypting.Encrypt(PathToFile2, Helper.Key));
+            write.WriteLine("\n");
+            write.WriteLine(Helper.Separation);
 
             write.WriteLine(Crypting.Encrypt(answers.Count.ToString(), Helper.Key));
             foreach (var answer in answers)
@@ -162,6 +172,7 @@ namespace CommonLibrary
                 NoteString = "",
                 Note2String = "",
                 PathToFileString = "",
+                PathToFileString2 = "",
                 tempString = "",
                 temp = "";
             bool first = true;
@@ -263,10 +274,36 @@ namespace CommonLibrary
             } while (temp != Helper.Separation);
             PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
 
+            temp = tempString = "";
+            first = true;
+            do
+            {
+                if (first)
+                {
+                    first = !first;
+                }
+                else
+                {
+                    if (temp != "")
+                    {
+                        PathToFileString2 += tempString + '\n';
+                    }
+                }
+
+                if (tempString != "")
+                {
+                    //NoteString += '\n';
+                }
+                temp = read.ReadLine();
+                tempString = Crypting.Decrypt(temp, Helper.Key);
+            } while (temp != Helper.Separation);
+            PathToFileString2 = PathToFileString2.Remove(PathToFileString2.Length - 1);
+
             Text = TextString;
             Note = NoteString;
             Note2 = Note2String;
             PathToFile = PathToFileString;
+            PathToFile2 = PathToFileString2;
             //String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
             //Text = TextAndNote[0];
             //Note = TextAndNote[1];

@@ -802,5 +802,10 @@ namespace Application
         {
             ShowQuestion();
         }
+
+        private void openFile2(object sender, RoutedEventArgs e)
+        {
+            Process.Start(questions[currentQuestion].GetPathToFile2());
+        }
     }
 }

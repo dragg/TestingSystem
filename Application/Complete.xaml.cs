@@ -85,6 +85,7 @@ namespace Application
         private void WindowClosed(object sender, EventArgs e)
         {
             this.Owner.Show();
+            this.Owner.Focus();
         }
 
         private void NextAndClose(object sender, RoutedEventArgs e)
