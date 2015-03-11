@@ -63,7 +63,7 @@
         </Style>
 
     </Window.Resources>
-    <DockPanel>
+    <DockPanel Background="#FFB6EA6C">
         <TextBlock DockPanel.Dock="Top" Margin="10" TextAlignment="Center" Name="tbStatus" Text="Информация: верно или нет!" VerticalAlignment="Center" />
         <ToggleButton DockPanel.Dock="Bottom" Margin="10" Content="ОК" Height="26" Width="75" Style="{DynamicResource ToggleButtonStyle1}" Click="OkAndClose"/>
         <ScrollViewer Margin="10" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

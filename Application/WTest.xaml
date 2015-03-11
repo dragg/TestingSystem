@@ -63,11 +63,7 @@
         </Style>
 
     </Window.Resources>
-    <Grid>
-        <Grid.Background>
-            <!--<ImageBrush ImageSource="pack://application:,,,/Resources/background.png" />-->
-            <ImageBrush ImageSource="background.png" />
-        </Grid.Background>
+    <Grid Background="#FFB6EA6C">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600px"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>

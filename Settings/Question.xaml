@@ -63,7 +63,7 @@
         </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FFB6EA6C">
         <Grid.RowDefinitions>
             <RowDefinition Height="*">
             </RowDefinition>
@@ -113,8 +113,8 @@
             
             <DockPanel Grid.Column="0">
                 <StackPanel DockPanel.Dock="Left" Margin="10,10,0,10">
-                    <Button Margin="0,25,0,5" Content="Удалить" Height="26" HorizontalAlignment="Left" IsEnabled="False" Name="btDeleteAnswer" VerticalAlignment="Top" Width="85" Click="DeleteAnswer" Background="#FF4EBDEB"  BorderBrush="#FFE22B2B"/>
-                    <Button Margin="0,5,0,0" Content="Изменить" Height="26" HorizontalAlignment="Left" IsEnabled="False"  Name="btChangeAnswer" VerticalAlignment="Top" Width="85" Click="ChangeAnswer" Background="#FF4EBDEB" BorderBrush="#FFE22B2B"/>
+                    <ToggleButton Margin="0,25,0,5" Content="Удалить" Height="26" HorizontalAlignment="Left" IsEnabled="False" Name="btDeleteAnswer" VerticalAlignment="Top" Width="85" Click="DeleteAnswer" Style="{DynamicResource ToggleButtonStyle1}"/>
+                    <ToggleButton Margin="0,5,0,0" Content="Изменить" Height="26" HorizontalAlignment="Left" IsEnabled="False"  Name="btChangeAnswer" VerticalAlignment="Top" Width="85" Click="ChangeAnswer" Style="{DynamicResource ToggleButtonStyle1}"/>
                 </StackPanel>
                 
                 <TextBlock DockPanel.Dock="Top" Height="15" Margin="10,10,10,10" Name="textBlock2" Text="Варианты ответов:"/>
@@ -151,7 +151,7 @@
                     
                 </DockPanel>
 
-                <Button Grid.Row="1" DockPanel.Dock="Bottom" Content="Добивить вариант ответа" Height="26"   Name="button1"  Width="220" Click="AddAnswer" Background="#FF4EBDEB"  BorderBrush="#FFE22B2B"/>
+                <ToggleButton Grid.Row="1" DockPanel.Dock="Bottom" Content="Добивить вариант ответа" Height="26"   Name="button1"  Width="220" Click="AddAnswer" Style="{DynamicResource ToggleButtonStyle1}"/>
             </Grid>
         </Grid>
 
@@ -171,12 +171,12 @@
             <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" TextAlignment="Center" Text="Файл для иной информации"></TextBlock>
             
             <TextBlock Grid.Row="1" Grid.Column="0" Name="tbPathToFile"  Margin="5">PathToFile</TextBlock>
-            <Button Grid.Row="1" Grid.Column="1" Margin="5" Click="Select_file">Выбрать файл</Button>
+            <ToggleButton Grid.Row="1" Grid.Column="1" Margin="5" Click="Select_file" Style="{DynamicResource ToggleButtonStyle1}">Выбрать файл</ToggleButton>
 
             <TextBlock Grid.Row="1" Grid.Column="2" Name="tbPathToFile2"  Margin="5">PathToFile</TextBlock>
-            <Button Grid.Row="1" Grid.Column="3" Margin="5" Click="selectFile2">Выбрать файл</Button>
+            <ToggleButton Grid.Row="1" Grid.Column="3" Margin="5" Click="selectFile2" Style="{DynamicResource ToggleButtonStyle1}">Выбрать файл</ToggleButton>
         </Grid>
-        
-        <Button Grid.Row="3" Content="Сохранить вопрос" Height="26" HorizontalAlignment="Center" Name="btSave" VerticalAlignment="Center" Width="150" Click="SaveAndClose" Background="#FF4EBDEB" />
+
+        <ToggleButton Grid.Row="3" Content="Сохранить вопрос" Height="26" HorizontalAlignment="Center" Name="btSave" VerticalAlignment="Center" Width="150" Click="SaveAndClose" Style="{DynamicResource ToggleButtonStyle1}"/>
     </Grid>
 </Window>

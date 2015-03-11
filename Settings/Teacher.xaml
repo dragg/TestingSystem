@@ -64,7 +64,7 @@
         </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FFB6EA6C">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"></RowDefinition>
             <RowDefinition></RowDefinition>
