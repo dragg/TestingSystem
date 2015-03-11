@@ -81,7 +81,7 @@
             <RowDefinition Height="60px"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" FontSize="72" Foreground="White" Padding="90" >Название</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" FontSize="48" Foreground="White" Padding="70" FontFamily="/Application;component/Resources/#1Isadora M Bold" TextWrapping="Wrap">Квалификация административных нарушений в области таможенного законодательства</TextBlock>
 
         <ToggleButton Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Начать работу" Margin="15" Click="ProtocolWindows" MaxWidth="200px" Style="{DynamicResource ToggleButtonStyle1}"></ToggleButton >
 
