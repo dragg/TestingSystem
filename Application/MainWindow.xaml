@@ -85,6 +85,11 @@
             <TextBlock Margin="134,99,150, 500" FontWeight="Normal" FontSize="12" Name="year">15</TextBlock>
             <TextBox Name="FIO" Margin="290,135,15,486" FontSize="11" MaxLength="35" />
         </Grid>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="KoAP.png" Stretch="UniformToFill" />
+            </Grid.Background>
+        </Grid>
 
         <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Продолжить" Margin="15" x:Name="button1" Click="BeginTest" MaxWidth="200px"/>
 

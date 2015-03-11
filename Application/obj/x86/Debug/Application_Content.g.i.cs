@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("protocol.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("koap.png")]
 
 
