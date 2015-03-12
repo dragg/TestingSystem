@@ -1,3 +1,3 @@
 # TestingSystem
-lease don't see this project!
+Please don't see this project!
 This is a very good example of how not to write applications!
