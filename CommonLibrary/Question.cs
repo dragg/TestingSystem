@@ -67,8 +67,10 @@ namespace CommonLibrary
             Text = text;
             Note = note;
             Note2 = note2;
-            PathToFile = pathToFile;
-            PathToFile2 = pathToFile2;
+            //PathToFile = pathToFile;
+            PathToFile = GetRelativePath(Directory.GetCurrentDirectory(), pathToFile);
+            //PathToFile2 = pathToFile2;
+            PathToFile2 = GetRelativePath(Directory.GetCurrentDirectory(), pathToFile2);
             this.answers = (answers == null ? new List<Answer>() : new List<Answer>(answers));
         }
 
@@ -123,12 +125,12 @@ namespace CommonLibrary
 
         public String GetPathToFile()
         {
-            return PathToFile;
+            return System.IO.Path.GetFullPath(PathToFile);
         }
 
         public String GetPathToFile2()
         {
-            return PathToFile2;
+            return System.IO.Path.GetFullPath(PathToFile2);
         }
 
         public bool CheckFile()
@@ -354,6 +356,40 @@ namespace CommonLibrary
         public bool IsNewQuestion()
         {
             return NewQuestion;
+        }
+
+        private static string GetRelativePath(string BasePath, string AbsolutePath)
+        {
+            char Separator = System.IO.Path.DirectorySeparatorChar;
+            if (string.IsNullOrWhiteSpace(BasePath)) BasePath = Directory.GetCurrentDirectory();
+            var ReturnPath = "";
+            var CommonPart = "";
+            var BasePathFolders = BasePath.Split(Separator);
+            var AbsolutePathFolders = AbsolutePath.Split(Separator);
+            var i = 0;
+            while (i < BasePathFolders.Length & i < AbsolutePathFolders.Length)
+            {
+                if (BasePathFolders[i].ToLower() == AbsolutePathFolders[i].ToLower())
+                {
+                    CommonPart += BasePathFolders[i] + Separator;
+                }
+                else
+                {
+                    break;
+                }
+                i += 1;
+            }
+            if (CommonPart.Length > 0)
+            {
+                var parents = BasePath.Substring(CommonPart.Length - 1).Split(Separator);
+                foreach (var ParentDir in parents)
+                {
+                    if (!string.IsNullOrEmpty(ParentDir))
+                        ReturnPath += ".." + Separator;
+                }
+            }
+            ReturnPath += AbsolutePath.Substring(CommonPart.Length);
+            return ReturnPath;
         }
     }
 }

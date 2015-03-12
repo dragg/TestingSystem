@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CommonLibrary;
 using Microsoft.Win32;
+using System.IO;
 
 namespace Settings
 {
@@ -232,6 +233,9 @@ namespace Settings
             if (myDialog.ShowDialog() == true)
             {
                 PathToFile = myDialog.FileName;
+
+                //PathToFile = GetRelativePath(Directory.GetCurrentDirectory(), PathToFile);
+
                 tbPathToFile.Text = myDialog.SafeFileName;
             }
         }
@@ -244,8 +248,34 @@ namespace Settings
             if (myDialog.ShowDialog() == true)
             {
                 PathToFile2 = myDialog.FileName;
+
+                //PathToFile2 = GetRelativePath(Directory.GetCurrentDirectory(), PathToFile2);
+                //string abs = System.IO.Path.GetFullPath(path);
+
                 tbPathToFile2.Text = myDialog.SafeFileName;
             }
         }
+
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            double w = SystemParameters.VirtualScreenWidth / 3 - 25;
+            tbQuestion.Width = w;
+            tbNote.Width = w;
+            tbNote2.Width = w;
+
+            w = SystemParameters.VirtualScreenWidth / 2 - 25;
+
+            tempAnswer.Width = w;
+            //double w = this.Width;
+            //MessageBox.Show(w.ToString());
+        }
+
+        private void Window_SizeChanged_1(object sender, SizeChangedEventArgs e)
+        {
+            //double w = this.Width;
+            //MessageBox.Show(w.ToString());
+        }
+
+        
     }
 }

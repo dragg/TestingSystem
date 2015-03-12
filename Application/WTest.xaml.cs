@@ -809,7 +809,14 @@ namespace Application
 
         private void openFile2(object sender, RoutedEventArgs e)
         {
-            Process.Start(questions[currentQuestion].GetPathToFile2());
+            try
+            {
+                Process.Start(questions[currentQuestion].GetPathToFile2());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удалось октрыть файл");
+            }
         }
     }
 }
