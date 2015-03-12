@@ -174,15 +174,13 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="0" Margin="10, 10, 10, 10" Content="КоАП" Name="btNote" Click="ShowNote2" IsEnabled="True"   ></ToggleButton>
-            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="1" Margin="10, 10, 10, 10" Content="Иная информация" Name="btNote2" Click="openFile2" IsEnabled="True"   ></ToggleButton>
-            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="2" Margin="10, 10, 10, 10" Content="Предыдущий" Name="btPrev" Click="Prev" IsEnabled="False"   ></ToggleButton>
-            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="3" Margin="10, 10, 10, 10" Content="Ответить" Name="btToAnswer" Click="ToAnswer"   ></ToggleButton>
-            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="4" Margin="10, 10, 10, 10" Content="Следующий" Name="btNext" Click="Next"   ></ToggleButton>
-            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="5" Margin="10, 10, 10, 10" Content="Завершить тест" Name="btFinish" Click="Finish" IsEnabled="True"   ></ToggleButton>
+            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="0" Margin="10, 10, 10, 10" Content="Иная информация" Name="btNote2" Click="openFile2" IsEnabled="True"   ></ToggleButton>
+            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="1" Margin="10, 10, 10, 10" Content="Предыдущий" Name="btPrev" Click="Prev" IsEnabled="False"   ></ToggleButton>
+            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="2" Margin="10, 10, 10, 10" Content="Ответить" Name="btToAnswer" Click="ToAnswer"   ></ToggleButton>
+            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="3" Margin="10, 10, 10, 10" Content="Следующий" Name="btNext" Click="Next"   ></ToggleButton>
+            <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Grid.Column="4" Margin="10, 10, 10, 10" Content="Завершить тест" Name="btFinish" Click="Finish" IsEnabled="True"   ></ToggleButton>
         </Grid>
     </Grid>
 </Window>

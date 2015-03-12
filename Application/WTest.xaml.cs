@@ -156,7 +156,7 @@ namespace Application
             SaveValues();//Сохраняем отмеченные значения
             if (wasAnswerAndHow[currentQuestion + 1].Item1[0])
             {
-                btNote.IsEnabled = true;
+                //btNote.IsEnabled = true;
             }
             else
             {
@@ -172,7 +172,7 @@ namespace Application
             SaveValues();//Сохраняем отмеченные значения
             if (wasAnswerAndHow[currentQuestion - 1].Item1[0])
             {
-                btNote.IsEnabled = true;
+                //btNote.IsEnabled = true;
             }
             else
             {
@@ -281,7 +281,7 @@ namespace Application
                 //if (CheckAllAnswer())
                 //    btFinish.IsEnabled = true;
 
-                btNote.IsEnabled = true;
+                //btNote.IsEnabled = true;
                 btToAnswer.IsEnabled = false;
 
                 ShowStatus();
