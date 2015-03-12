@@ -66,7 +66,7 @@
     </Window.Resources>
     <Grid Background="#FFB6EA6C">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -95,6 +95,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="450">
@@ -107,7 +108,12 @@
                 <TextBox DockPanel.Dock="Right" Margin="5,10,10,10" Height="26" x:Name="tbPathToFile" VerticalAlignment="Top" />
             </DockPanel>
 
-            <ToggleButton Grid.Row="2" Content="Применить" Height="26" x:Name="button2" Width="100" Click="ApplySettings" Style="{DynamicResource ToggleButtonStyle1}" />
+            <DockPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="450">
+                <TextBlock DockPanel.Dock="Left" Margin="10,10,5,10" Height="20" Text="Пароль для доступа к файлу вопросов:" />
+                <PasswordBox DockPanel.Dock="Right" Margin="5,10,10,10" Height="26" x:Name="pbPassword" VerticalAlignment="Top"></PasswordBox>
+            </DockPanel>
+            
+            <ToggleButton Grid.Row="3" Content="Применить" Height="26" x:Name="button2" Width="100" Click="ApplySettings" Style="{DynamicResource ToggleButtonStyle1}" />
         </Grid>
         
         

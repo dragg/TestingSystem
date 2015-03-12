@@ -48,11 +48,13 @@ namespace Settings
         {
             FileInfo settings = new FileInfo(Helper.PathToSettings);
             bool exist = true;
+            string password = "";
             if (settings.Exists == false)
             {
                 StreamWriter writer = settings.AppendText();
                 writer.WriteLine(Helper.DefaultCountQuestion);
                 writer.WriteLine(Helper.DefaultPathToFileWithQuestion);
+                
                 writer.Close();
                 exist = false;
             }
@@ -69,11 +71,13 @@ namespace Settings
                 StreamReader reader = new StreamReader(Helper.PathToSettings);
                 countQuestion = Int32.Parse(reader.ReadLine());
                 path = reader.ReadLine();
+                password = reader.ReadLine();
                 reader.Close();
             }
 
             tbCountQuestion.Text = countQuestion.ToString();
             tbPathToFile.Text = path;
+            pbPassword.Password = password;
             
         }
 
@@ -251,6 +255,7 @@ namespace Settings
                 StreamWriter writer = settings.AppendText();
                 writer.WriteLine(cnt);
                 writer.WriteLine(path);
+                writer.WriteLine(pbPassword.Password);
                 writer.Close();
                 MessageBox.Show("Настройки успешно сохранены!", "Успех", MessageBoxButton.OK);
             }
