@@ -47,12 +47,10 @@ namespace Application
             if (!note2)
             {
                 tbStatus.Text = result ? "Вы ответили верно!" : "Вы ошиблись!";
-                //tbNote.Text = result ? "" : note;
             }
             else
             {
                 tbStatus.Text = "";
-                //tbNote.Text = note;
             }
         }
     }

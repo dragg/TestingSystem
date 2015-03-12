@@ -44,15 +44,31 @@ namespace Application
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             if (!note2)
             {
                 tbStatus.Text = result ? "Вы ответили верно!" : "Вы ошиблись!";
                 tbNote.Text = result ? "" : note;
+                if (result)
+                {
+                    this.Width = 300;
+                    this.Height = 150;
+                    tbNote.Width = 0;
+                    tbNote.Height = 0;
+                }
+                else
+                {
+                    this.Width = 600;
+                    this.Height = 400;
+                }
             }
             else
             {
-                tbStatus.Text = "";
+                tbStatus.Text = "КоАП";
+                this.Title = "КоАП";
                 tbNote.Text = note;
+                this.Width = 600;
+                this.Height = 400;
             }
         }
     }
