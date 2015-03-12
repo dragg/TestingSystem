@@ -59,9 +59,15 @@ namespace Application
             bool fail = false;
             try
             {
+                string temp;
                 StreamReader reader = new StreamReader(Helper.PathToSettings);
-                this.countQuestion = Int32.Parse(reader.ReadLine());
-                String path = reader.ReadLine();
+
+                temp = reader.ReadLine();
+                this.countQuestion = Int32.Parse(Crypting.Decrypt(temp, Helper.Key));
+
+                temp = reader.ReadLine();
+                String path = Crypting.Decrypt(temp, Helper.Key);
+
                 reader.Close();
 
                 List<Question> AllQuestions = new List<Question>();

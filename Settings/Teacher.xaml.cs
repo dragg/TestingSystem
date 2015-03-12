@@ -69,9 +69,21 @@ namespace Settings
             else
             {
                 StreamReader reader = new StreamReader(Helper.PathToSettings);
-                countQuestion = Int32.Parse(reader.ReadLine());
-                path = reader.ReadLine();
-                password = reader.ReadLine();
+
+                string temp = "";
+
+                temp = reader.ReadLine();
+                countQuestion = Int32.Parse(Crypting.Decrypt(temp, Helper.Key));
+
+                temp = reader.ReadLine();
+                path = Crypting.Decrypt(temp, Helper.Key);
+
+                temp = reader.ReadLine();
+                password = Crypting.Decrypt(temp, Helper.Key);
+
+                //countQuestion = Int32.Parse(reader.ReadLine());
+                //path = reader.ReadLine();
+                //password = reader.ReadLine();
                 reader.Close();
             }
 
@@ -253,9 +265,12 @@ namespace Settings
                 if(settings.Exists)
                     settings.Delete();
                 StreamWriter writer = settings.AppendText();
-                writer.WriteLine(cnt);
-                writer.WriteLine(path);
-                writer.WriteLine(pbPassword.Password);
+                writer.WriteLine(Crypting.Encrypt(cnt.ToString(), Helper.Key));
+                writer.WriteLine(Crypting.Encrypt(path, Helper.Key));
+                writer.WriteLine(Crypting.Encrypt(pbPassword.Password, Helper.Key));
+                //writer.WriteLine(cnt);
+                //writer.WriteLine(path);
+                //writer.WriteLine(pbPassword.Password);
                 writer.Close();
                 MessageBox.Show("Настройки успешно сохранены!", "Успех", MessageBoxButton.OK);
             }
