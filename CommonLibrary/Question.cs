@@ -201,7 +201,7 @@ namespace CommonLibrary
                     temp = read.ReadLine();
                     tempString = Crypting.Decrypt(temp, Helper.Key);
                 } while (temp != Helper.Separation);
-                //TextString = TextString.Remove(TextString.Length - 1);
+                TextString = TextString.Remove(TextString.Length - 1);
 
                 temp = tempString = "";
                 first = true;
@@ -226,7 +226,7 @@ namespace CommonLibrary
                     temp = read.ReadLine();
                     tempString = Crypting.Decrypt(temp, Helper.Key);
                 } while (temp != Helper.Separation);
-                //NoteString = NoteString.Remove(NoteString.Length - 1);
+                NoteString = NoteString.Remove(NoteString.Length - 1);
 
                 temp = tempString = "";
                 first = true;
@@ -251,7 +251,7 @@ namespace CommonLibrary
                     temp = read.ReadLine();
                     tempString = Crypting.Decrypt(temp, Helper.Key);
                 } while (temp != Helper.Separation);
-                //Note2String = Note2String.Remove(Note2String.Length - 1);
+                Note2String = Note2String.Remove(Note2String.Length - 1);
 
                 temp = tempString = "";
                 first = true;
@@ -276,7 +276,7 @@ namespace CommonLibrary
                     temp = read.ReadLine();
                     tempString = Crypting.Decrypt(temp, Helper.Key);
                 } while (temp != Helper.Separation);
-                //PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
+                PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
 
                 temp = tempString = "";
                 first = true;
@@ -301,7 +301,7 @@ namespace CommonLibrary
                     temp = read.ReadLine();
                     tempString = Crypting.Decrypt(temp, Helper.Key);
                 } while (temp != Helper.Separation);
-                //PathToFileString2 = PathToFileString2.Remove(PathToFileString2.Length - 1);
+                PathToFileString2 = PathToFileString2.Remove(PathToFileString2.Length - 1);
 
                 Text = TextString;
                 Note = NoteString;

@@ -109,7 +109,7 @@ namespace Settings
             }
 
             //Обновляем таблицу на форме
-            //lbListQuestions.ItemsSource = QuestionData.AsDataView();
+            lbListQuestions.ItemsSource = QuestionData.AsDataView();
 
 
             //lbListQuestions.Items.Clear();
@@ -207,29 +207,29 @@ namespace Settings
                         String countQuestion = Crypting.Decrypt(read_text.ReadLine(), Helper.Key);
 
                         cnt = Int32.Parse(countQuestion);
-                        //listQuestions = new List<CommonLibrary.Question>(cnt);
+                        listQuestions = new List<CommonLibrary.Question>(cnt);
                         //MessageBox.Show("before read questions file");
                         for (int i = 0; i < cnt; i++)
                         {
                             Question q = new Question();
                             q.ReadQuestion(read_text);
                             //MessageBox.Show("before add to list");
-                            //listQuestions.Add(q);
-                            MessageBox.Show("after add to list");
+                            listQuestions.Add(q);
+                            //MessageBox.Show("after add to list");
                         }
-                        //read_text.Close();
-                        MessageBox.Show("after close file");
+                        read_text.Close();
+                        //MessageBox.Show("after close file");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Data.ToString());
-                        MessageBox.Show(cnt.ToString());
+                        //MessageBox.Show(ex.Data.ToString());
+                        //MessageBox.Show(cnt.ToString());
                         MessageBox.Show(ex.Message);
                     }
                     
                 }
 
-                //ShowQuestion();
+                ShowQuestion();
             }
         }
 
