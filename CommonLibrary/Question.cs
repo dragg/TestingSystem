@@ -170,157 +170,164 @@ namespace CommonLibrary
 
         public void ReadQuestion(StreamReader read)
         {
-            String TextString = "",
+            try
+            {
+                String TextString = "",
                 NoteString = "",
                 Note2String = "",
                 PathToFileString = "",
                 PathToFileString2 = "",
                 tempString = "",
                 temp = "";
-            bool first = true;
-            do
-            {
-                if (first)
+                bool first = true;
+                do
                 {
-                    first = !first;
-                }
-                else
-                {
-                    if (temp != "")
+                    if (first)
                     {
-                        TextString += tempString + '\n';
+                        first = !first;
                     }
-                }
-                
-                if (tempString != "")
-                {
-                    //TextString += '\n';
-                }
-                temp = read.ReadLine();
-                tempString = Crypting.Decrypt(temp, Helper.Key);
-            } while (temp != Helper.Separation);
-            TextString = TextString.Remove(TextString.Length - 1);
-
-            temp = tempString = "";
-            first = true;
-            do
-            {
-                if (first)
-                {
-                    first = !first;
-                }
-                else
-                {
-                    if (temp != "")
+                    else
                     {
-                        NoteString += tempString + '\n';
+                        if (temp != "")
+                        {
+                            TextString += tempString + '\n';
+                        }
                     }
-                }
 
-                if (tempString != "")
-                {
-                    //NoteString += '\n';
-                }
-                temp = read.ReadLine();
-                tempString = Crypting.Decrypt(temp, Helper.Key);
-            } while (temp != Helper.Separation);
-            NoteString = NoteString.Remove(NoteString.Length - 1);
-
-            temp = tempString = "";
-            first = true;
-            do
-            {
-                if (first)
-                {
-                    first = !first;
-                }
-                else
-                {
-                    if (temp != "")
+                    if (tempString != "")
                     {
-                        Note2String += tempString + '\n';
+                        //TextString += '\n';
                     }
-                }
+                    temp = read.ReadLine();
+                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                } while (temp != Helper.Separation);
+                //TextString = TextString.Remove(TextString.Length - 1);
 
-                if (tempString != "")
+                temp = tempString = "";
+                first = true;
+                do
                 {
-                    //NoteString += '\n';
-                }
-                temp = read.ReadLine();
-                tempString = Crypting.Decrypt(temp, Helper.Key);
-            } while (temp != Helper.Separation);
-            Note2String = Note2String.Remove(Note2String.Length - 1);
-
-            temp = tempString = "";
-            first = true;
-            do
-            {
-                if (first)
-                {
-                    first = !first;
-                }
-                else
-                {
-                    if (temp != "")
+                    if (first)
                     {
-                        PathToFileString += tempString + '\n';
+                        first = !first;
                     }
-                }
-
-                if (tempString != "")
-                {
-                    //NoteString += '\n';
-                }
-                temp = read.ReadLine();
-                tempString = Crypting.Decrypt(temp, Helper.Key);
-            } while (temp != Helper.Separation);
-            PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
-
-            temp = tempString = "";
-            first = true;
-            do
-            {
-                if (first)
-                {
-                    first = !first;
-                }
-                else
-                {
-                    if (temp != "")
+                    else
                     {
-                        PathToFileString2 += tempString + '\n';
+                        if (temp != "")
+                        {
+                            NoteString += tempString + '\n';
+                        }
                     }
-                }
 
-                if (tempString != "")
+                    if (tempString != "")
+                    {
+                        //NoteString += '\n';
+                    }
+                    temp = read.ReadLine();
+                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                } while (temp != Helper.Separation);
+                //NoteString = NoteString.Remove(NoteString.Length - 1);
+
+                temp = tempString = "";
+                first = true;
+                do
                 {
-                    //NoteString += '\n';
-                }
-                temp = read.ReadLine();
-                tempString = Crypting.Decrypt(temp, Helper.Key);
-            } while (temp != Helper.Separation);
-            PathToFileString2 = PathToFileString2.Remove(PathToFileString2.Length - 1);
+                    if (first)
+                    {
+                        first = !first;
+                    }
+                    else
+                    {
+                        if (temp != "")
+                        {
+                            Note2String += tempString + '\n';
+                        }
+                    }
 
-            Text = TextString;
-            Note = NoteString;
-            Note2 = Note2String;
-            PathToFile = PathToFileString;
-            PathToFile2 = PathToFileString2;
-            //String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
-            //Text = TextAndNote[0];
-            //Note = TextAndNote[1];
-            String cntString = tempString = Crypting.Decrypt(read.ReadLine(), Helper.Key);
-            int cnt = Int32.Parse(cntString);
-            for (int i = 0; i < cnt; i++)
-            {
-                Answer answer = new Answer();
-                answer.ReadAnswer(read);
-                answers.Add(answer);
+                    if (tempString != "")
+                    {
+                        //NoteString += '\n';
+                    }
+                    temp = read.ReadLine();
+                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                } while (temp != Helper.Separation);
+                //Note2String = Note2String.Remove(Note2String.Length - 1);
+
+                temp = tempString = "";
+                first = true;
+                do
+                {
+                    if (first)
+                    {
+                        first = !first;
+                    }
+                    else
+                    {
+                        if (temp != "")
+                        {
+                            PathToFileString += tempString + '\n';
+                        }
+                    }
+
+                    if (tempString != "")
+                    {
+                        //NoteString += '\n';
+                    }
+                    temp = read.ReadLine();
+                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                } while (temp != Helper.Separation);
+                //PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
+
+                temp = tempString = "";
+                first = true;
+                do
+                {
+                    if (first)
+                    {
+                        first = !first;
+                    }
+                    else
+                    {
+                        if (temp != "")
+                        {
+                            PathToFileString2 += tempString + '\n';
+                        }
+                    }
+
+                    if (tempString != "")
+                    {
+                        //NoteString += '\n';
+                    }
+                    temp = read.ReadLine();
+                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                } while (temp != Helper.Separation);
+                //PathToFileString2 = PathToFileString2.Remove(PathToFileString2.Length - 1);
+
+                Text = TextString;
+                Note = NoteString;
+                Note2 = Note2String;
+                PathToFile = PathToFileString;
+                PathToFile2 = PathToFileString2;
+                //String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
+                //Text = TextAndNote[0];
+                //Note = TextAndNote[1];
+                String cntString = tempString = Crypting.Decrypt(read.ReadLine(), Helper.Key);
+                int cnt = Int32.Parse(cntString);
+                for (int i = 0; i < cnt; i++)
+                {
+                    Answer answer = new Answer();
+                    answer.ReadAnswer(read);
+                    answers.Add(answer);
+                }
+                NewQuestion = false;
+
+
+                SortBySubject();
             }
-            NewQuestion = false;
-
-
-            SortBySubject();
+            catch (Exception ex)
+            {
+                throw new Exception("Ошибка при чтении вопроса");
+            }
         }
 
         private void SortBySubject()

@@ -60,31 +60,53 @@ namespace Application
             try
             {
                 string temp;
+                String path = "";
                 StreamReader reader = new StreamReader(Helper.PathToSettings);
+                try
+                {
+                    temp = reader.ReadLine();
+                    this.countQuestion = Int32.Parse(Crypting.Decrypt(temp, Helper.Key));
 
-                temp = reader.ReadLine();
-                this.countQuestion = Int32.Parse(Crypting.Decrypt(temp, Helper.Key));
+                    temp = reader.ReadLine();
+                    path = Crypting.Decrypt(temp, Helper.Key);
 
-                temp = reader.ReadLine();
-                String path = Crypting.Decrypt(temp, Helper.Key);
-
-                reader.Close();
+                    reader.Close();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении настроек");
+                }
 
                 List<Question> AllQuestions = new List<Question>();
-                reader = new StreamReader(path);
-                int countQuestion = Int32.Parse(Crypting.Decrypt(reader.ReadLine(), Helper.Key));
-                if (countQuestion == 1)
+                int countQuestion = 0;
+                try
+
                 {
-                    btNext.IsEnabled = false;
+                    
+                    reader = new StreamReader(path);
+                    countQuestion =Int32.Parse(Crypting.Decrypt(reader.ReadLine(), Helper.Key));
+                    if (countQuestion == 1)
+                    {
+                        btNext.IsEnabled = false;
+                    }
+                    for (int i = 0; i < countQuestion; i++)
+                    {
+                        resultTest.Add(false);
+                        Question q = new Question();
+                        q.ReadQuestion(reader);
+                        AllQuestions.Add(q);
+                    }
+                    reader.Close();
                 }
-                for (int i = 0; i < countQuestion; i++)
+                catch (Exception ex)
                 {
-                    resultTest.Add(false);
-                    Question q = new Question();
-                    q.ReadQuestion(reader);
-                    AllQuestions.Add(q);
+                    MessageBox.Show("Ошибка при чтении вопросов!");
+                    MessageBox.Show("Всего вопросов " + countQuestion + " !");
                 }
-                reader.Close();
+
+                
+
+                
 
 
                 List<bool> used = new List<bool>();
@@ -95,7 +117,8 @@ namespace Application
 
                 if (AllQuestions.Count < this.countQuestion)
                 {
-                    throw new Exception("Количество вопросов меньше, чем задано для теста!");
+                    throw new Exception("Должно быть " + this.countQuestion +" вопросов!");
+                    //throw new Exception("Количество вопросов меньше, чем задано для теста!");
                 }
                 else
                 {
@@ -116,7 +139,8 @@ namespace Application
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при чтении вопросов. Возможно нет исходного файла");
+                MessageBox.Show(ex.Message);
+                //MessageBox.Show("Ошибка при чтении вопросов. Возможно нет исходного файла");
                 fail = true;
             }
 

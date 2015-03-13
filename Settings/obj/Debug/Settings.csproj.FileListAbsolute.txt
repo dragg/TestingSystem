@@ -1,5 +1,0 @@
-C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\Settings\bin\Debug\Settings.exe.config
-C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\Settings\bin\Debug\Settings.exe
-C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\Settings\bin\Debug\Settings.pdb
-C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\Settings\bin\Debug\CommonLibrary.dll
-C:\Users\z.nikolay\Documents\Visual Studio 2012\Projects\TestingSystem\Settings\bin\Debug\CommonLibrary.pdb
