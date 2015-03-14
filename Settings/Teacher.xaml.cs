@@ -15,6 +15,7 @@ using System.IO;
 using CommonLibrary;
 using System.Data;
 using CommonLibrary;
+using System.Windows.Controls.Primitives;
 
 namespace Settings
 {
@@ -124,6 +125,10 @@ namespace Settings
         {
             ChangeQuestion();
             Changed = true;
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void AddQuestion(object sender, RoutedEventArgs e)
@@ -132,16 +137,28 @@ namespace Settings
             wQuestion.Owner = this;
             wQuestion.ShowDialog();
             Changed = true;
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void ChangeQuestion(object sender, RoutedEventArgs e)
         {
             ChangeQuestion();
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void DeleteQuestion(object sender, RoutedEventArgs e)
         {
             DeleteQuestion();
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void lbListQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -231,6 +248,10 @@ namespace Settings
 
                 ShowQuestion();
             }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void SaveQuestions(object sender, RoutedEventArgs e)
@@ -261,6 +282,10 @@ namespace Settings
                 }
                 write_text.Close();
             }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void DeleteAllQuestion(object sender, RoutedEventArgs e)
@@ -268,6 +293,10 @@ namespace Settings
             listQuestions.Clear();
             ShowQuestion();
             Changed = true;
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void ApplySettings(object sender, RoutedEventArgs e)
@@ -289,10 +318,17 @@ namespace Settings
                 //writer.WriteLine(pbPassword.Password);
                 writer.Close();
                 MessageBox.Show("Настройки успешно сохранены!", "Успех", MessageBoxButton.OK);
+
+                (sender as ToggleButton).IsChecked = false;
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Не удалось сохранить настройки!", "Ошибка", MessageBoxButton.OK);
+            }
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;    
             }
         }
 

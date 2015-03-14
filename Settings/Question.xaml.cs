@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using CommonLibrary;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows.Controls.Primitives;
 
 namespace Settings
 {
@@ -67,6 +68,10 @@ namespace Settings
             {
                 MessageBox.Show("Поле ввода ответа - пусто");
             }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void SortListBox()
@@ -82,6 +87,10 @@ namespace Settings
             {
                 lbAnswers.Items.RemoveAt(lbAnswers.SelectedIndex);
             }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void ChangeAnswer(object sender, RoutedEventArgs e)
@@ -92,6 +101,10 @@ namespace Settings
                 right.IsChecked = (lbAnswers.Items[lbAnswers.SelectedIndex] as Answer).Right;
                 cmbSubject.SelectedValue = (lbAnswers.Items[lbAnswers.SelectedIndex] as Answer).Subject;
                 lbAnswers.Items.RemoveAt(lbAnswers.SelectedIndex);
+            }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
             }
         }
 
@@ -199,6 +212,10 @@ namespace Settings
                     MessageBox.Show("Вопрос должен содержать один верный ответ в полях Объект, Субъект, Субъективная сторона и Объективная сторона!");
                 }
             }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -233,10 +250,11 @@ namespace Settings
             if (myDialog.ShowDialog() == true)
             {
                 PathToFile = myDialog.FileName;
-
-                //PathToFile = GetRelativePath(Directory.GetCurrentDirectory(), PathToFile);
-
                 tbPathToFile.Text = myDialog.SafeFileName;
+            }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
             }
         }
 
@@ -248,11 +266,11 @@ namespace Settings
             if (myDialog.ShowDialog() == true)
             {
                 PathToFile2 = myDialog.FileName;
-
-                //PathToFile2 = GetRelativePath(Directory.GetCurrentDirectory(), PathToFile2);
-                //string abs = System.IO.Path.GetFullPath(path);
-
                 tbPathToFile2.Text = myDialog.SafeFileName;
+            }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
             }
         }
 
@@ -272,8 +290,6 @@ namespace Settings
 
         private void Window_SizeChanged_1(object sender, SizeChangedEventArgs e)
         {
-            //double w = this.Width;
-            //MessageBox.Show(w.ToString());
         }
 
         
