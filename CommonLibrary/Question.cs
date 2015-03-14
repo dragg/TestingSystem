@@ -14,7 +14,12 @@ namespace CommonLibrary
         private String Note2;
         private String PathToFile;
         private String PathToFile2;
-        List<Answer> answers;
+        //List<Answer> answers;
+
+        //Используем массив, а не лист потому что возникла страннейшая неразрешимая ошибка 
+        private Answer[] answerArray = new Answer[50];
+        private int countAnswer = 0;
+
         private bool NewQuestion = true;
 
         public bool isValid()
@@ -24,7 +29,7 @@ namespace CommonLibrary
             List<Answer> rightAnswers = new List<Answer>();
 
             //Находим верные ответы
-            foreach (var answer in answers)
+            foreach (var answer in answerArray)
             {
                 if (answer.isRight())
                 {
@@ -58,41 +63,43 @@ namespace CommonLibrary
 
         public Question()
         {
-            answers = new List<Answer>();
+            //answers = new List<Answer>();
         }
 
-        public Question(String text, String note, String note2, String pathToFile, String pathToFile2, List<Answer> answers = null, bool newQuestion = true)
+        public Question(String text, String note, String note2, String pathToFile, String pathToFile2, /*List<Answer>*/ Answer[] answers = null, bool newQuestion = true)
         {
             NewQuestion = newQuestion;
             Text = text;
             Note = note;
             Note2 = note2;
-            //PathToFile = pathToFile;
             PathToFile = GetRelativePath(Directory.GetCurrentDirectory(), pathToFile);
-            //PathToFile2 = pathToFile2;
             PathToFile2 = GetRelativePath(Directory.GetCurrentDirectory(), pathToFile2);
-            this.answers = (answers == null ? new List<Answer>() : new List<Answer>(answers));
+
+            this.answerArray = answers;
+            //this.answers = (answers == null ? new List<Answer>() : new List<Answer>(answers));
         }
 
         public void AddAnswer(Answer answer)
         {
-            answers.Add(answer);
+            answerArray[countAnswer++] = answer;
+            //answers.Add(answer);
         }
 
         public void DeleteAnswer(int index)
         {
-            answers.RemoveAt(index);
+            //TODO: 
+            //answers.RemoveAt(index);
         }
 
         public List<Answer> GetAllAnswer()
         {
-            return new List<Answer>(answers);
+            return (answerArray.ToList());
         }
 
         public int GetIndexAnswer(String answer)
         {
             int i = 0;
-            foreach (var item in answers)
+            foreach (var item in answerArray)
             {
                 if (item.Text == answer)
                 {
@@ -161,8 +168,8 @@ namespace CommonLibrary
             write.WriteLine("\n");
             write.WriteLine(Helper.Separation);
 
-            write.WriteLine(Crypting.Encrypt(answers.Count.ToString(), Helper.Key));
-            foreach (var answer in answers)
+            write.WriteLine(Crypting.Encrypt(this.countAnswer.ToString(), Helper.Key));
+            foreach (var answer in answerArray)
             {
                 answer.WriteAnswer(write);
             }
@@ -313,11 +320,13 @@ namespace CommonLibrary
                 //Note = TextAndNote[1];
                 String cntString = tempString = Crypting.Decrypt(read.ReadLine(), Helper.Key);
                 int cnt = Int32.Parse(cntString);
+                //answerArray = new Answer[cnt];
                 for (int i = 0; i < cnt; i++)
                 {
                     Answer answer = new Answer();
                     answer.ReadAnswer(read);
-                    answers.Add(answer);
+                    answerArray[countAnswer++] = answer;
+                    //answers.Add(answer);
                 }
                 NewQuestion = false;
 
@@ -347,17 +356,17 @@ namespace CommonLibrary
             //Сортируем
             for (int i = 0; i < names.Count; i++)
             {
-                for (int j = 0; j < answers.Count; j++)
+                for (int j = 0; j < countAnswer; j++)
                 {
-                    if (answers[j].Subject == names[i])
+                    if (answerArray[j].Subject == names[i])
                     {
-                        tempAnswers.Add(answers[j]);
+                        tempAnswers.Add(answerArray[j]);
                     }
                 }
             }
 
             //Записываем результат сортировки
-            answers = tempAnswers;
+            answerArray = tempAnswers.ToArray();
         }
 
         public bool IsNewQuestion()

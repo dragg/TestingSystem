@@ -123,7 +123,7 @@ namespace Settings
                     tbNote2.Text.ToString(),
                     PathToFile,
                     PathToFile2,
-                    answers,
+                    answers.ToArray(),
                     ((this.question == null) ? true : false));
                 if (question.isValid())
                 {

@@ -14,7 +14,6 @@ using Microsoft.Win32;
 using System.IO;
 using CommonLibrary;
 using System.Data;
-using CommonLibrary;
 
 namespace Settings
 {
@@ -27,7 +26,12 @@ namespace Settings
 
         private bool Changed = false;
 
-        private List<Question> listQuestions = new List<Question>();
+        //private List<Question> listQuestions;// = new List<Question>();
+
+        //Используем массив, а не лист потому что возникла страннейшая неразрешимая ошибка 
+        //Создаем массив из 1000 потенциальных вопросов
+        private Question[] listOfQuestion = new Question[1000];
+        private int countQuestion = 0;
 
         public DataTable QuestionData = new DataTable();
 
@@ -46,6 +50,7 @@ namespace Settings
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //listQuestions = new List<Question>();
             FileInfo settings = new FileInfo(Helper.PathToSettings);
             bool exist = true;
             string password = "";
@@ -99,12 +104,12 @@ namespace Settings
             QuestionData.Rows.Clear();
 
             //Задаем результаты в таблицу
-            for (int i = 0; i < listQuestions.Count; i++)
+            for (int i = 0; i < this.countQuestion; i++)
             {
                 var row = QuestionData.NewRow();
                 QuestionData.Rows.Add(row);
                 row["Number"] = i + 1;
-                String question = listQuestions[i].GetQuestion();
+                String question = listOfQuestion[i].GetQuestion();
                 row["Question"] = question.Substring(0, (question.Length > 120 ? 120 : question.Length));
             }
 
@@ -147,7 +152,7 @@ namespace Settings
         private void lbListQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var index = lbListQuestions.SelectedIndex;
-            if (index != -1 && index < listQuestions.Count)
+            if (index != -1 && index < this.countQuestion)
             {
                 btChangeQuestion.IsEnabled = btDeleteQuestion.IsEnabled = true;
             }
@@ -160,9 +165,10 @@ namespace Settings
         private void DeleteQuestion()
         {
             var index = lbListQuestions.SelectedIndex;
-            if (index != -1 && index < listQuestions.Count)
+            if (index != -1 && index < this.countQuestion)
             {
-                listQuestions.RemoveAt(index);
+                //TODO: Добавить удаление вопроса
+                //listQuestions.RemoveAt(index);
             }
             ShowQuestion();
         }
@@ -172,7 +178,7 @@ namespace Settings
             var index = lbListQuestions.SelectedIndex;
             if (index != -1)
             {
-                Question q = listQuestions[index] as Question;
+                Question q = listOfQuestion[index] as Question;
                 WQuestion wQuestion = new WQuestion(q);
                 wQuestion.Owner = this;
                 wQuestion.ShowDialog();
@@ -182,7 +188,7 @@ namespace Settings
 
         public void AddQuestion(Question q)
         {
-            listQuestions.Add(q);
+            listOfQuestion[this.countQuestion++] = q;
             ShowQuestion();
         }
 
@@ -207,17 +213,24 @@ namespace Settings
                         String countQuestion = Crypting.Decrypt(read_text.ReadLine(), Helper.Key);
 
                         cnt = Int32.Parse(countQuestion);
-                        listQuestions = new List<CommonLibrary.Question>(cnt);
+                        //listOfQuestion = new Question[cnt];
+                        //listQuestions = new List<CommonLibrary.Question>(cnt);
                         //MessageBox.Show("before read questions file");
                         for (int i = 0; i < cnt; i++)
                         {
                             Question q = new Question();
                             q.ReadQuestion(read_text);
                             //MessageBox.Show("before add to list");
-                            listQuestions.Add(q);
+                            //listQuestions.Insert(i, q);
+                            listOfQuestion[i] = q;
+                            //var list = new List<Question>();
+                            //list.Add(q);
+                            //listQuestions.Add(q);
                             //MessageBox.Show("after add to list");
                         }
                         read_text.Close();
+                        //MessageBox.Show("Before to list");
+                        //var listQuestions = listOfQuestion.<int, Question>();
                         //MessageBox.Show("after close file");
                     }
                     catch (Exception ex)
@@ -254,8 +267,8 @@ namespace Settings
                 StreamWriter write_text;
                 write_text = file.AppendText();
 
-                write_text.WriteLine(Crypting.Encrypt(listQuestions.Count.ToString(), Helper.Key));
-                foreach (var question in listQuestions)
+                write_text.WriteLine(Crypting.Encrypt(this.countQuestion.ToString(), Helper.Key));
+                foreach (var question in listOfQuestion)
                 {
                     question.WriteQuestion(write_text);
                 }
@@ -265,7 +278,8 @@ namespace Settings
 
         private void DeleteAllQuestion(object sender, RoutedEventArgs e)
         {
-            listQuestions.Clear();
+            //TODO: добавить удаление всех вопросов
+            //listQuestions.Clear();
             ShowQuestion();
             Changed = true;
         }
@@ -311,7 +325,7 @@ namespace Settings
         public void ChangeQuestion(Question q)
         {
             var index = lbListQuestions.SelectedIndex;
-            listQuestions[index] = q;
+            listOfQuestion[index] = q;
         }
     }
 }
