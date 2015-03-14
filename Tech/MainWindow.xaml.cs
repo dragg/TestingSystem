@@ -105,7 +105,11 @@ namespace Application
                 MessageBox.Show("Пожалуйста, заполните данные!");
                 FIO.Focus();
             }
-            
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

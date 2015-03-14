@@ -16,6 +16,7 @@ using System.IO;
 using System.Text; 
 using System.Security.Cryptography;
 using System.Diagnostics;
+using System.Windows.Controls.Primitives;
 
 namespace Application
 {
@@ -165,6 +166,11 @@ namespace Application
 
             DeleteQuestion();//Убираем отображение старого вопроса
             NextQuestion();//Показываем новый вопрос
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void Prev(object sender, RoutedEventArgs e)
@@ -181,6 +187,11 @@ namespace Application
 
             DeleteQuestion();//Убираем отображение старого вопроса
             PrevQuestion();//Показываем новый вопрос
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void Finish(object sender, RoutedEventArgs e)
@@ -235,6 +246,11 @@ namespace Application
                     this.Close();
                 }
             }
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void ShowNote(object sender, RoutedEventArgs e)
@@ -243,6 +259,11 @@ namespace Application
             wInformation.Owner = this;
             wInformation.SaveInformation(IsRightAnswer(), questions[currentQuestion].GetNote());
             wInformation.ShowDialog();
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void ToAnswer(object sender, RoutedEventArgs e)
@@ -285,6 +306,11 @@ namespace Application
                 btToAnswer.IsEnabled = false;
 
                 ShowStatus();
+            }
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
             }
         }
 
@@ -763,6 +789,11 @@ namespace Application
             wInformation.Owner = this;
             wInformation.SaveInformation(IsRightAnswer(), questions[currentQuestion].GetNote2(), true);
             wInformation.ShowDialog();
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void Closing_Window(object sender, System.ComponentModel.CancelEventArgs e)
@@ -822,6 +853,10 @@ namespace Application
             catch (Exception ex)
             {
                 MessageBox.Show("Не удалось октрыть файл");
+            }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
             }
         }
     }

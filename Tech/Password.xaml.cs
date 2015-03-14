@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -59,6 +60,10 @@ namespace Application
             catch (Exception ex)
             {
                 MessageBox.Show("Невозможно прочитать файл с настройками!", "Ошибка доступа", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
             }
         }
     }

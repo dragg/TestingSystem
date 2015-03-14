@@ -14,6 +14,7 @@ using CommonLibrary;
 using System.IO;
 using System.Diagnostics;
 using System.Data;
+using System.Windows.Controls.Primitives;
 
 namespace Application
 {
@@ -135,6 +136,11 @@ namespace Application
             {
                 MessageBox.Show("Вы должны выбрать верно отвеченный вопрос");
             }
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
             
         }
 
@@ -182,6 +188,11 @@ namespace Application
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void dataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
