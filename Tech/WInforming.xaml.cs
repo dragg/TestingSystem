@@ -44,7 +44,6 @@ namespace Application
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             if (!note2)
             {
                 tbStatus.Text = result ? "Вы ответили верно!" : "Вы ошиблись!";
@@ -70,6 +69,15 @@ namespace Application
                 this.Width = 600;
                 this.Height = 400;
             }
+
+            //Позиционируем после того как утсановили разрешение окна
+            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+            double height = SystemParameters.FullPrimaryScreenHeight,
+                width = SystemParameters.FullPrimaryScreenWidth;
+
+            this.Top = (height - this.Height) / 2;
+            this.Left = (width - this.Width) / 2;
         }
     }
 }
