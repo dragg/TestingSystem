@@ -199,7 +199,10 @@ namespace CommonLibrary
                         //TextString += '\n';
                     }
                     temp = read.ReadLine();
-                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                    if (temp != "" && temp != Helper.Separation)
+                    {
+                        tempString = Crypting.Decrypt(temp, Helper.Key);
+                    }
                 } while (temp != Helper.Separation);
                 TextString = TextString.Remove(TextString.Length - 1);
 
@@ -224,7 +227,10 @@ namespace CommonLibrary
                         //NoteString += '\n';
                     }
                     temp = read.ReadLine();
-                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                    if (temp != "" && temp != Helper.Separation)
+                    {
+                        tempString = Crypting.Decrypt(temp, Helper.Key);
+                    }
                 } while (temp != Helper.Separation);
                 NoteString = NoteString.Remove(NoteString.Length - 1);
 
@@ -249,7 +255,10 @@ namespace CommonLibrary
                         //NoteString += '\n';
                     }
                     temp = read.ReadLine();
-                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                    if (temp != "" && temp != Helper.Separation)
+                    {
+                        tempString = Crypting.Decrypt(temp, Helper.Key);
+                    }
                 } while (temp != Helper.Separation);
                 Note2String = Note2String.Remove(Note2String.Length - 1);
 
@@ -274,7 +283,10 @@ namespace CommonLibrary
                         //NoteString += '\n';
                     }
                     temp = read.ReadLine();
-                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                    if (temp != "" && temp != Helper.Separation)
+                    {
+                        tempString = Crypting.Decrypt(temp, Helper.Key);
+                    }
                 } while (temp != Helper.Separation);
                 PathToFileString = PathToFileString.Remove(PathToFileString.Length - 1);
 
@@ -299,7 +311,10 @@ namespace CommonLibrary
                         //NoteString += '\n';
                     }
                     temp = read.ReadLine();
-                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                    if (temp != "" && temp != Helper.Separation)
+                    {
+                        tempString = Crypting.Decrypt(temp, Helper.Key);
+                    }
                 } while (temp != Helper.Separation);
                 PathToFileString2 = PathToFileString2.Remove(PathToFileString2.Length - 1);
 
@@ -308,9 +323,7 @@ namespace CommonLibrary
                 Note2 = Note2String;
                 PathToFile = PathToFileString;
                 PathToFile2 = PathToFileString2;
-                //String[] TextAndNote = read.ReadLine().Split(new Char[] {Helper.Separation});
-                //Text = TextAndNote[0];
-                //Note = TextAndNote[1];
+
                 String cntString = tempString = Crypting.Decrypt(read.ReadLine(), Helper.Key);
                 int cnt = Int32.Parse(cntString);
                 for (int i = 0; i < cnt; i++)

@@ -87,7 +87,10 @@ namespace CommonLibrary
                     //answer += '\n';
                 }
                 temp = read.ReadLine();
-                tempString = Crypting.Decrypt(temp, Helper.Key);
+                if (temp != "" && temp != Helper.Separation)
+                {
+                    tempString = Crypting.Decrypt(temp, Helper.Key);
+                }
             } while (temp != Helper.Separation);
             answer = answer.Remove(answer.Length - 1);
 
