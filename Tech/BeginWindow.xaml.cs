@@ -29,6 +29,10 @@ namespace Application
             window.Owner = this;
             this.Hide();
             window.Show();
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
         }
 
         private void Close(object sender, RoutedEventArgs e)

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CommonLibrary;
+using System.Windows.Controls.Primitives;
 
 namespace Application
 {
