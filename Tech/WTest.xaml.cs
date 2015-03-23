@@ -33,6 +33,8 @@ namespace Application
 
         private List<bool> resultTest = new List<bool>();
 
+        private List<bool> secondAttampt = new List<bool>();
+
         DateTime begin;
 
         //Для каждого вопроса каждому последовательно ответу задается соответственный параметр:
@@ -81,6 +83,7 @@ namespace Application
                 for (int i = 0; i < countQuestion; i++)
                 {
                     resultTest.Add(false);
+                    secondAttampt.Add(false);
                     Question q = new Question();
                     q.ReadQuestion(reader);
                     AllQuestions.Add(q);
@@ -275,15 +278,35 @@ namespace Application
             }
             else
             {
+                if (secondAttampt[currentQuestion] == false)
+                {
+                    CheckAnswerAndShowResult();
+
+                    secondAttampt[currentQuestion] = true;
+                }
+                else
+                {
+                    CheckAnswerAndShowResult(false);
+                }
+            }
+
+            if ((sender as ToggleButton) != null)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
+        }
+
+        private void CheckAnswerAndShowResult(bool first = true)
+        {
+            SaveValues();
+
+            WInforming wInformation = new WInforming();
+            wInformation.Owner = this;
+
+            bool error = !IsRightAnswer();
+            if (!error && first || !first)
+            {
                 wasAnswerAndHow[currentQuestion].Item1[0] = true;//Помечаем, что на вопрос ответили
-                SaveValues();
-
-                WInforming wInformation = new WInforming();
-                wInformation.Owner = this;
-
-                bool error = !IsRightAnswer();
-
-
                 if (error)
                 {
                     wrong++;
@@ -292,10 +315,13 @@ namespace Application
                 {
                     right++;
                 }
+            }
 
-                wInformation.SaveInformation(error ? false : true, questions[currentQuestion].GetNote());
-                wInformation.ShowDialog();
+            wInformation.SaveInformation(error ? false : true, questions[currentQuestion].GetNote());
+            wInformation.ShowDialog();
 
+            if (!error && first || !first)
+            {
                 DisableAllCheckBox();
 
                 //Now always is enabled!
@@ -306,11 +332,6 @@ namespace Application
                 btToAnswer.IsEnabled = false;
 
                 ShowStatus();
-            }
-
-            if ((sender as ToggleButton) != null)
-            {
-                (sender as ToggleButton).IsChecked = false;
             }
         }
 
