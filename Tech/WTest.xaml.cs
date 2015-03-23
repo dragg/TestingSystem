@@ -213,17 +213,20 @@ namespace Application
             }
             else
             {
-
                 finish = true;
                 StreamWriter writer;
                 FileInfo info = new FileInfo(Helper.PathToMembers);
-
+                int countSecondAttampt = 0;
+                foreach (var item in secondAttampt)
+                {
+                    countSecondAttampt += item ? 1 : 0;
+                }
                 if (!info.Exists)
                 {
                     info.Create().Close();
 
                     writer = info.AppendText();
-                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов\tДата\t\tВремя в минутах");
+                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов\tВторых попыток\tДата\t\tВремя в минутах");
                     writer.Close();
                 }
                 writer = info.AppendText();
@@ -232,7 +235,7 @@ namespace Application
                 {
                     str += "\t";
                 }
-                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}\t\t\t{4}\t{5}", countQuestion, right, wrong, UserName, DateTime.Now.Date.ToShortDateString(), (int)((DateTime.Now - begin).TotalMinutes));
+                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}\t\t\t{6}\t\t{4}\t{5}", countQuestion, right, wrong, UserName, DateTime.Now.Date.ToShortDateString(), (int)((DateTime.Now - begin).TotalMinutes), countSecondAttampt);
                 writer.Close();
 
                 //MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
@@ -280,9 +283,10 @@ namespace Application
             {
                 if (secondAttampt[currentQuestion] == false)
                 {
-                    CheckAnswerAndShowResult();
-
-                    secondAttampt[currentQuestion] = true;
+                    if (!CheckAnswerAndShowResult())
+                    {
+                        secondAttampt[currentQuestion] = true;    
+                    }
                 }
                 else
                 {
@@ -296,8 +300,10 @@ namespace Application
             }
         }
 
-        private void CheckAnswerAndShowResult(bool first = true)
+        private bool CheckAnswerAndShowResult(bool first = true)
         {
+            bool result = false;
+
             SaveValues();
 
             WInforming wInformation = new WInforming();
@@ -314,6 +320,7 @@ namespace Application
                 else
                 {
                     right++;
+                    result = true;
                 }
             }
 
@@ -333,6 +340,8 @@ namespace Application
 
                 ShowStatus();
             }
+
+            return result;
         }
 
         private void Window_Closed(object sender, EventArgs e)

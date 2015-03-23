@@ -244,7 +244,7 @@ namespace Application
                     info.Create().Close();
 
                     writer = info.AppendText();
-                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов\tДата\t\tВремя в минутах");
+                    writer.WriteLine("ФИО\t\t\t\t\tВсего фабул\tПравильных ответов\tНеверных ответов\tВторых попыток\tДата\t\tВремя в минутах");
                     writer.Close();
                 }
                 writer = info.AppendText();
@@ -253,7 +253,7 @@ namespace Application
                 {
                     str += "\t";
                 }
-                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}\t\t\t{4}\t{5}", countQuestion, right, wrong, UserName, DateTime.Now.Date.ToShortDateString(), (int)((DateTime.Now - begin).TotalMinutes));
+                writer.WriteLine(str + "{0}\t\t{1}\t\t\t{2}\t\t\t{6}\t\t{4}\t{5}", countQuestion, right, wrong, UserName, DateTime.Now.Date.ToShortDateString(), (int)((DateTime.Now - begin).TotalMinutes), 0);
                 writer.Close();
 
                 //MessageBox.Show(String.Format("Ваш результат:\nВерных ответов:{0}\nНеверных ответов:{1}", right, wrong));
