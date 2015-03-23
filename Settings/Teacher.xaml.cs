@@ -154,7 +154,12 @@ namespace Settings
 
         private void DeleteQuestion(object sender, RoutedEventArgs e)
         {
-            DeleteQuestion();
+            var result = MessageBox.Show("Вы действительно хотите удалить вопрос?", "Удаление вопроса", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if(result == MessageBoxResult.Yes)
+            {
+                DeleteQuestion();
+            }
+
             if ((sender as ToggleButton) != null)
             {
                 (sender as ToggleButton).IsChecked = false;
