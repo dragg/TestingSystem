@@ -25,6 +25,8 @@ namespace Application
     /// </summary>
     public partial class WTest : Window
     {
+        private Question currentQuestionAnswers = null;
+
         private String UserName = "";
 
         private bool closing_now = false;
@@ -205,8 +207,11 @@ namespace Application
                 bool first = true;
                 for (int i = 0; i < wasAnswerAndHow.Count; i++)
                 {
-                    message += (first ? "" : ", ") + (i + 1);
-                    first = false;
+                    if (!wasAnswerAndHow[currentQuestion].Item1[0])
+                    {
+                        message += (first ? "" : ", ") + (i + 1);
+                        first = false;
+                    }
                 }
                 message += "!";
                 MessageBox.Show(message);
@@ -745,6 +750,7 @@ namespace Application
 
         private void SaveValues()
         {
+            currentQuestionAnswers = new Question(questions[currentQuestion]);
             foreach (var item in spObjectAnswers.Children)
             {
                 SaveObjectValues(item);
@@ -764,6 +770,7 @@ namespace Application
             {
                 SaveObjectValues(item);
             }
+            currentQuestionAnswers = null;
         }
 
         private void SaveObjectValues(object item)
@@ -780,7 +787,7 @@ namespace Application
                 else if (itemBox is TextBlock)
                 {
                     String textOfAnswer = (itemBox as TextBlock).Text;
-                    int index = questions[currentQuestion].GetIndexAnswer(textOfAnswer);
+                    int index = currentQuestionAnswers.GetIndexAnswer(textOfAnswer);
                     wasAnswerAndHow[currentQuestion].Item2[index] = check;
                 }
             }
