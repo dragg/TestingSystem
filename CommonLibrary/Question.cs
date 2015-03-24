@@ -16,6 +16,7 @@ namespace CommonLibrary
         private String PathToFile2;
         List<Answer> answers;
         private bool NewQuestion = true;
+        private List<bool> selected = new List<bool>();
 
         public bool isValid()
         {
@@ -61,6 +62,23 @@ namespace CommonLibrary
             answers = new List<Answer>();
         }
 
+        public Question(Question q)
+        {
+            NewQuestion = false;
+            Text = q.Text;
+            Note = q.Note;
+            Note2 = q.Note2;
+            PathToFile = q.PathToFile;
+            PathToFile2 = q.PathToFile2;
+            answers = new List<Answer>();
+            selected = new List<bool>();
+            foreach (var item in q.GetAllAnswer())
+            {
+                answers.Add(item);
+                selected.Add(false);
+            }
+        }
+
         public Question(String text, String note, String note2, String pathToFile, String pathToFile2, List<Answer> answers = null, bool newQuestion = true)
         {
             NewQuestion = newQuestion;
@@ -94,11 +112,16 @@ namespace CommonLibrary
             int i = 0;
             foreach (var item in answers)
             {
-                if (item.Text == answer)
+                if (item.Text == answer && !selected[i])
                 {
+                    selected[i] = true;
                     break;
                 }
                 i++;
+            }
+            if (i >= answers.Count)
+            {
+                i = 0;
             }
             return i;
         }
@@ -331,6 +354,7 @@ namespace CommonLibrary
                     Answer answer = new Answer();
                     answer.ReadAnswer(read);
                     answers.Add(answer);
+                    selected.Add(false);
                 }
                 NewQuestion = false;
 
