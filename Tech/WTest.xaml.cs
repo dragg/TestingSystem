@@ -207,7 +207,7 @@ namespace Application
                 bool first = true;
                 for (int i = 0; i < wasAnswerAndHow.Count; i++)
                 {
-                    if (!wasAnswerAndHow[currentQuestion].Item1[0])
+                    if (!wasAnswerAndHow[i].Item1[0])
                     {
                         message += (first ? "" : ", ") + (i + 1);
                         first = false;
